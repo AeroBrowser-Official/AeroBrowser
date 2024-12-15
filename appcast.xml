@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>AeroBrowser Updates</title> <!-- App title -->
-    <link>https://github.com/kilianbalaguer/AeroBrowser</link> <!-- Link to your repo or app page -->
-    <description>Updates for AeroBrowser</description> <!-- Description of your updates -->
+    <title>AeroBrowser Updates</title>
+    <link>https://github.com/kilianbalaguer/AeroBrowser</link>
+    <description>Updates for AeroBrowser</description>
     <language>en</language>
 
     <!-- Item for version v0.0.2-alpha -->
@@ -11,17 +11,20 @@
       <title>v0.0.2-alpha</title>
       <description>
         <![CDATA[
-          <br/><br/><small><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small></small>
+          This release introduces the latest features and bug fixes for AeroBrowser.<br/>
+          For more details, visit the <a href="https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.2-alpha">release notes</a>.
+          <br/><br/><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small>
         ]]>
       </description>
-      <pubDate>2024-12-15 07:10:00 -0800</pubDate>
-      <!-- The actual update file -->
-      <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.2-alpha/AeroBrowser.app.zip" sparkle:version="0.0.2-alpha" content-type="application/octet-stream" length="1849830"/>
-      <!-- Sparkle-specific attributes -->
-      <sparkle:version>0.0.2-alpha</sparkle:version> <!-- Version number -->
-      <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
-      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.2-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
-      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+      <pubDate>Sun, 15 Dec 2024 07:10:00 -0800</pubDate>
+      <enclosure 
+        url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.2-alpha/AeroBrowser.app.zip" 
+        sparkle:version="0.0.2-alpha" 
+        sparkle:minimumSystemVersion="10.14" 
+        length="1849830" 
+        type="application/octet-stream"/>
+      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.2-alpha</sparkle:releaseNotesLink>
+      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature>
     </item>
 
     <!-- Item for version v0.0.1-alpha -->
@@ -29,17 +32,21 @@
       <title>v0.0.1-alpha</title>
       <description>
         <![CDATA[
-          <br/><br/><small><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small></small>
+          Initial release of AeroBrowser.<br/>
+          For more details, visit the <a href="https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.1-alpha">release notes</a>.
+          <br/><br/><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small>
         ]]>
       </description>
-      <pubDate>2024-12-15 07:10:00 -0800</pubDate>
-      <!-- The actual update file -->
-      <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.1-alpha/AeroBrowser.app.zip" sparkle:version="0.0.1-alpha" content-type="application/octet-stream" length="1849825"/>
-      <!-- Sparkle-specific attributes -->
-      <sparkle:version>0.0.1-alpha</sparkle:version> <!-- Version number -->
-      <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
-      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.1-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
-      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+      <pubDate>Sun, 15 Dec 2024 07:10:00 -0800</pubDate>
+      <enclosure 
+        url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.1-alpha/AeroBrowser.app.zip" 
+        sparkle:version="0.0.1-alpha" 
+        sparkle:minimumSystemVersion="10.14" 
+        length="1849825" 
+        type="application/octet-stream"/>
+      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.1-alpha</sparkle:releaseNotesLink>
+      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature>
     </item>
+
   </channel>
 </rss>
