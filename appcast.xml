@@ -21,7 +21,7 @@
       <sparkle:version>0.0.2-alpha</sparkle:version> <!-- Version number -->
       <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
       <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.2-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
-      <sparkle:dsaSignature>YOUR_SIGNATURE_HERE</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
     </item>
 
     <!-- Item for version v0.0.1-alpha -->
@@ -39,7 +39,7 @@
       <sparkle:version>0.0.1-alpha</sparkle:version> <!-- Version number -->
       <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
       <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.1-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
-      <sparkle:dsaSignature>YOUR_SIGNATURE_HERE</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+      <sparkle:dsaSignature>QMmLDueocuBv4NcgzzJ5News1W8Q46TdKEbIqq9e/16QEnQiwXYwcXvU9+xuF7tZl4JEkG1YY3/njINcnN6KCg==</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
     </item>
   </channel>
 </rss>
