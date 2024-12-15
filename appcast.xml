@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>AeroBrowser Updates</title> <!-- App title -->
+    <link>https://github.com/kilianbalaguer/AeroBrowser</link> <!-- Link to your repo or app page -->
+    <description>Updates for AeroBrowser</description> <!-- Description of your updates -->
+    <language>en</language>
+
+    <!-- Item for version v0.0.2-alpha -->
+    <item>
+      <title>v0.0.2-alpha</title>
+      <description>
+        <![CDATA[
+          <br/><br/><small><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small></small>
+        ]]>
+      </description>
+      <pubDate>2024-12-15 07:10:00 -0800</pubDate>
+      <!-- The actual update file -->
+      <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.2-alpha/AeroBrowser.app.zip" sparkle:version="0.0.2-alpha" content-type="application/octet-stream" length="1849830"/>
+      <!-- Sparkle-specific attributes -->
+      <sparkle:version>0.0.2-alpha</sparkle:version> <!-- Version number -->
+      <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
+      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.2-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
+      <sparkle:dsaSignature>YOUR_SIGNATURE_HERE</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+    </item>
+
+    <!-- Item for version v0.0.1-alpha -->
+    <item>
+      <title>v0.0.1-alpha</title>
+      <description>
+        <![CDATA[
+          <br/><br/><small><small>Generated with <a href="https://www.appcastify.com">AppCastify</a></small></small>
+        ]]>
+      </description>
+      <pubDate>2024-12-15 07:10:00 -0800</pubDate>
+      <!-- The actual update file -->
+      <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.1-alpha/AeroBrowser.app.zip" sparkle:version="0.0.1-alpha" content-type="application/octet-stream" length="1849825"/>
+      <!-- Sparkle-specific attributes -->
+      <sparkle:version>0.0.1-alpha</sparkle:version> <!-- Version number -->
+      <sparkle:minimumSystemVersion>10.14</sparkle:minimumSystemVersion> <!-- Minimum required macOS version -->
+      <sparkle:releaseNotesLink>https://github.com/kilianbalaguer/AeroBrowser/releases/tag/v0.0.1-alpha</sparkle:releaseNotesLink> <!-- Link to release notes -->
+      <sparkle:dsaSignature>YOUR_SIGNATURE_HERE</sparkle:dsaSignature> <!-- Optional, add DSA signature for security -->
+    </item>
+  </channel>
+</rss>
