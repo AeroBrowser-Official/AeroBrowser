@@ -6,6 +6,10 @@
             <title>v0.0.1-alpha</title>
             <pubDate>Mon, 16 Dec 2024 16:14:56 +0100</pubDate>
             <sparkle:version>v0.0.1-alpha</sparkle:version>
+            <description><![CDATA[
+            <h2>Initial Release</h2>
+            ]]>
+            </description>
             <sparkle:shortVersionString>v0.0.1-alpha</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
             <enclosure url="https://kilianbalaguer.github.io/AeroBrowser/AeroBrowser.zip" length="1860869" type="application/octet-stream" sparkle:edSignature="KEFQcW32pm0cNYwsOiYntbapWuHQrnGHJgUZ67yTpiKT/AGnPO4Veo4G8whZnXT8pXHy0Jmd89Kq3j3luAEIDw=="/>
