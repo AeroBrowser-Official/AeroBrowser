@@ -27,7 +27,7 @@
             </description>
             <sparkle:shortVersionString>v0.0.2-alpha</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
-            <enclosure url="https://kilianbalaguer.github.io/AeroBrowser/AeroBrowser.zip" length="1928742" type="application/octet-stream" sparkle:edSignature="WV1pMsyJhx/zRtDwvFI4w9rGo3KWLkIHEFujM4XjzK7+W/lPqJlEr83V5tp0X48kyUDrL0fEr/kzRNAWOaYsBA=="/>
+            <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.2-alpha/AeroBrowser.zip" length="1928742" type="application/octet-stream" sparkle:edSignature="WV1pMsyJhx/zRtDwvFI4w9rGo3KWLkIHEFujM4XjzK7+W/lPqJlEr83V5tp0X48kyUDrL0fEr/kzRNAWOaYsBA=="/>
         </item>
         <item>
             <title>v0.0.1-alpha</title>
@@ -39,7 +39,7 @@
             </description>
             <sparkle:shortVersionString>v0.0.1-alpha</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
-            <enclosure url="https://kilianbalaguer.github.io/AeroBrowser/AeroBrowser.zip" length="1860869" type="application/octet-stream" sparkle:edSignature="KEFQcW32pm0cNYwsOiYntbapWuHQrnGHJgUZ67yTpiKT/AGnPO4Veo4G8whZnXT8pXHy0Jmd89Kq3j3luAEIDw=="/>
+            <enclosure url="https://github.com/kilianbalaguer/AeroBrowser/releases/download/v0.0.1-alpha/AeroBrowser.zip" length="1860869" type="application/octet-stream" sparkle:edSignature="KEFQcW32pm0cNYwsOiYntbapWuHQrnGHJgUZ67yTpiKT/AGnPO4Veo4G8whZnXT8pXHy0Jmd89Kq3j3luAEIDw=="/>
         </item>
     </channel>
 </rss>
