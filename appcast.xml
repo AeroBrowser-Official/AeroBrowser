@@ -3,9 +3,40 @@
     <channel>
         <title>AeroBrowser</title>
         <item>
+            <title>v0.0.2-alpha</title>
+            <pubDate>Fri, 20 Dec 2024 11:56:21 +0100</pubDate>
+            <sparkle:version>v0.0.2-alpha</sparkle:version>
+            <description><![CDATA[
+                <h2>v0.0.2-alpha Release</h2>
+
+                <h3>Whats New</h3>
+
+                - Added a Settings Page
+                  - Added a GeneralSettingsView (Unfinished)
+                  - Added a AeroAIView (Unfinished)
+                  - Added a ThemesSettingsView (more themes to come)
+                  - Added a AdvancedSettingsView (Unfinished)
+
+                <h3>Changes</h3>
+
+                - Made the SearchBar and SuggestionWindow and WebView better looking
+                  - Added blur
+                  - Removed the black Stroke around the window
+                  - Removed the shadows
+            ]]>
+            </description>
+            <sparkle:shortVersionString>v0.0.2-alpha</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
+            <enclosure url="https://kilianbalaguer.github.io/AeroBrowser/AeroBrowser.zip" length="1928742" type="application/octet-stream" sparkle:edSignature="WV1pMsyJhx/zRtDwvFI4w9rGo3KWLkIHEFujM4XjzK7+W/lPqJlEr83V5tp0X48kyUDrL0fEr/kzRNAWOaYsBA=="/>
+        </item>
+        <item>
             <title>v0.0.1-alpha</title>
             <pubDate>Mon, 16 Dec 2024 16:14:56 +0100</pubDate>
             <sparkle:version>v0.0.1-alpha</sparkle:version>
+            <description><![CDATA[
+            <h2>Initial Release</h2>
+            ]]>
+            </description>
             <sparkle:shortVersionString>v0.0.1-alpha</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.5</sparkle:minimumSystemVersion>
             <enclosure url="https://kilianbalaguer.github.io/AeroBrowser/AeroBrowser.zip" length="1860869" type="application/octet-stream" sparkle:edSignature="KEFQcW32pm0cNYwsOiYntbapWuHQrnGHJgUZ67yTpiKT/AGnPO4Veo4G8whZnXT8pXHy0Jmd89Kq3j3luAEIDw=="/>
