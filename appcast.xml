@@ -48,7 +48,7 @@ Version 1.0.0 is not considered alpha or beta anymore but note that there might 
             </description>
             <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/AeroBrowser-Official/AeroBrowser/releases/download/v1.0.0/AeroBrowser.Installer.pkg" length="1928742" type="application/octet-stream" sparkle:edSignature="WV1pMsyJhx/zRtDwvFI4w9rGo3KWLkIHEFujM4XjzK7+W/lPqJlEr83V5tp0X48kyUDrL0fEr/kzRNAWOaYsBA=="/>
+            <enclosure url="https://github.com/AeroBrowser-Official/AeroBrowser/releases/download/v1.0.0/AeroBrowser.zip" length="1928742" type="application/octet-stream" sparkle:edSignature="WV1pMsyJhx/zRtDwvFI4w9rGo3KWLkIHEFujM4XjzK7+W/lPqJlEr83V5tp0X48kyUDrL0fEr/kzRNAWOaYsBA=="/>
         </item>
         <item>
             <title>v0.0.2-alpha</title>
