@@ -1,0 +1,153 @@
+// App
+"lang" = "en";
+
+// Menu
+"Opacity" = "AeroBrowser";
+"About Opacity" = "About AeroBrowser";
+"Quit Opacity" = "Quit AeroBrowser";
+"File" = "File";
+"New Window" = "New Window";
+"New Tab" = "New Tab";
+"Close Window" = "Close Window";
+"Close Tab" = "Close Tab";
+"Edit" = "Edit";
+"Cut" = "Cut";
+"Copy" = "Copy";
+"Paste" = "Paste";
+"Select All" = "Select All";
+"Find" = "Find";
+"Find in Page..." = "Find in Page...";
+"Find Next" = "Find Next";
+"Find Previous" = "Find Previous";
+"View" = "View";
+"Reload Page" = "Reload Page";
+"Show Sidebar" = "Show Sidebar";
+"Hide Sidebar" = "Hide Sidebar";
+"Window" = "Window";
+"Minimize" = "Minimize";
+"Zoom" = "Zoom";
+
+// Error Page
+"Page not found" = "Page not found";
+"The server IP address for '%@' could not be found." = "The server IP address for '%@' could not be found.";
+"Unable to connect to site" = "Unable to connect to site";
+"Connection has been reset." = "Connection has been reset.";
+"No internet connection" = "No internet connection";
+"There is no internet connection." = "There is no internet connection.";
+"Unknown error" = "Unknown error";
+"An unknown error occurred." = "An unknown error occurred.";
+
+"Refresh" = "Refresh";
+
+"Search.." = "Search..";
+
+"Location services are disabled in your Mac system settings" = "Location services are disabled in your Mac system settings";
+"Open Settings" = "Open Settings";
+
+"Notification Permissions" = "Notification Permissions";
+"Notification permission granted." = "Notification permission granted.";
+
+"Do you want to allow notifications from '%@'?" = "Do you want to allow notifications from '%@'?";
+"Allow" = "Allow";
+"Deny" = "Deny";
+
+"Allow '%@' to use your location?" = "Allow '%@' to use your location?";
+
+"Notification" = "Notification";
+"Location" = "Loaciton";
+
+"New Folder" = "New Folder";
+"Bookmark" = "Bookmark";
+
+"Change Name" = "Change Name";
+"Delete" = "Delete";
+"Are you sure you want to clear all search history?" = "Are you sure you want to clear all search history?";
+"Are you sure you want to clear all visit history?" = "Are you sure you want to clear all visit history?";
+"Add Folder" = "Add Folder";
+"Folder" = "Folder";
+"Name" = "Name";
+"Save" = "Save";
+
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+
+"1 Day" = "1 Day";
+"1 Week" = "1 Week";
+"1 Month" = "1 Month";
+"Indefinite" = "Indefinite";
+
+"Settings" = "Settings";
+"General" = "General";
+"Language" = "Language";
+"Search History" = "Search History";
+"Visit History" = "Visit History";
+"Permission" = "Permission";
+"Permissions" = "Permissions";
+"Search Engine" = "Search Engine";
+"Screen Mode" = "Screen Mode";
+"Retention Period" = "Retention Period";
+"Show More" = "Show More";
+"Cancel" = "Cancel";
+"Notification" = "Notification";
+"allowed" = "allowed";
+"denied" = "denied";
+"There is no domain with permissions set." = "There is no domain with permissions set.";
+"There is no search history." = "There is no search history.";
+"There is no visit history." = "There is no visit history.";
+"Blocks unnecessary ads and trackers using DuckDuckGo's tracking protection list along with additional rules." = "Blocks unnecessary ads and trackers using DuckDuckGo’s tracking protection list along with additional rules.";
+"English" = "English";
+"Norwegian" = "Norwegian";
+"Hindi" = "Hindi";
+"Korean" = "Korean";
+"Chinese" = "Chinese";
+"German" = "German";
+"Japanese" = "Japanese";
+"Spanish" = "Spanish";
+"French" = "French";
+"The changes will take effect after restarting the app." = "The changes will take effect after restarting the app.";
+
+"Add Favorite" = "Add Favorite";
+"Edit Favorite" = "Edit Favorite";
+"Title" = "Title";
+"Address" = "Address";
+"Add" = "Add";
+
+"Save Image As.." = "Save Image As..";
+"Save As:" = "Save As:";
+
+"Tracker Blocking" = "Tracker Blocking";
+"Learn More" = "Learn More";
+
+"This connection is secure." = "This connection is secure.";
+"This is a page provided inside the app." = "This is a page provided inside the app.";
+"Certificate:" = "Certificate:";
+"This connection is not secure." = "This connection is not secure.";
+
+"SSL/TLS certificate error" = "SSL/TLS certificate error";
+"A secure connection cannot be made because the certificate is not valid." = "A secure connection cannot be made because the certificate is not valid.";
+
+"Blocked content" = "Blocked content";
+"This content has been blocked. To use the service, please adjust the tracker blocker level." = "This content has been blocked. To use the service, please adjust the tracker blocker level.";
+
+"Clear All" = "Clear All";
+
+"Contact Us" = "Contact Us";
+"Zoom In" = "Zoom In";
+"Zoom Out" = "Zoom Out";
+
+"Cookie" = "Cookie";
+"The current web page uses web storage." = "The current web page uses web storage.";
+"The current web page does not use web storage." = "The current web page does not use web storage.";
+"Clear Cookies and Storage" = "Clear Cookies and Storage";
+
+"Library" = "Library";
+
+"Ad Blocking" = "Ad Blocking";
+
+"Refresh after clearing cache" = "Refresh after clearing cache";
+
+"Load More" = "Load More";
+"No results found." = "No results found.";
+"Today" = "Today";
+"Yesterday" = "Yesterday";
