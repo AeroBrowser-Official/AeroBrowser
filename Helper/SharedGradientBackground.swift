@@ -9,17 +9,19 @@
 import SwiftUI
 
 struct SharedGradientBackground: View {
-    @AppStorage("selectedTheme") private var selectedTheme: String = Theme.bluePurple.rawValue
-    private var currentTheme: Theme {
-        Theme(rawValue: selectedTheme) ?? .bluePurple
-    }
-
+    @ObservedObject var browser: Browser
     var offset: CGFloat
 
     var body: some View {
-        currentTheme.gradient
-            .frame(height: 2000) // large height so both views can pull from it
+        let theme = browser.theme
+        let gradient = theme == .custom
+        ? theme.gradient(customColor1: browser.customColor1, customColor2: browser.customColor2, CustomRotation: browser.customPosition)
+            : theme.gradient()
+
+        gradient
+            .frame(height: 2000)
             .offset(y: offset)
             .clipped()
     }
 }
+

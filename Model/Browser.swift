@@ -22,6 +22,11 @@ final class Browser: ObservableObject, Identifiable {
   @Published var isSideBar: Bool = false
     @Published var settingsTab: SettingsSection = .General
     @Published var selectedSettingsCategory: SettingsCategory = .general
+    
+  @Published var customColor1: Color = .black
+  @Published var customColor2: Color = .black
+    @Published var theme: Theme = .bluePurple
+    @Published var customPosition: String = "tb"
 
   @Published var searchBoxRect: CGRect?
   
