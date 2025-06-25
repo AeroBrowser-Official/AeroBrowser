@@ -1,0 +1,150 @@
+"lang" = "ja";
+
+"Opacity" = "Opacity";
+"About Opacity" = "Opacityについて";
+"Quit Opacity" = "Opacity 終了";
+"File" = "ファイル";
+"New Window" = "新しいウィンドウ";
+"New Tab" = "新しいタブ";
+"Close Window" = "ウィンドウを閉じる";
+"Close Tab" = "タブを閉じる";
+"Edit" = "編集";
+"Cut" = "切り取り";
+"Copy" = "コピー";
+"Paste" = "貼り付け";
+"Select All" = "すべて選択";
+"Find" = "検索";
+"Find in Page..." = "ページ内検索...";
+"Find Next" = "次を検索";
+"Find Previous" = "前を検索";
+"View" = "表示";
+"Reload Page" = "ページを再読み込み";
+"Show Sidebar" = "サイドバーを表示";
+"Hide Sidebar" = "サイドバーを非表示";
+"Window" = "ウィンドウ";
+"Minimize" = "最小化";
+"Zoom" = "ズーム";
+
+"Page not found" = "ページが見つかりません";
+"The server IP address for '%@' could not be found." = "'%@' のサーバーIPアドレスが見つかりませんでした。";
+"Unable to connect to site" = "サイトに接続できません";
+"Connection has been reset." = "接続がリセットされました。";
+"No internet connection" = "インターネット接続なし";
+"There is no internet connection." = "インターネットに接続されていません。";
+"Unknown error" = "不明なエラー";
+"An unknown error occurred." = "不明なエラーが発生しました。";
+
+"Refresh" = "更新";
+
+"Search.." = "検索..";
+
+"Location services are disabled in your Mac system settings" = "Macのシステム設定で位置情報サービスが無効になっています。";
+"Open Settings" = "設定を開く";
+
+"Notification Permissions" = "通知の権限";
+"Notification permission granted." = "通知の許可がされました。";
+
+"Do you want to allow notifications from '%@'?" = "'%@' からの通知を許可しますか？";
+"Allow" = "許可";
+"Deny" = "拒否";
+
+"Allow '%@' to use your location?" = "'%@' に位置情報の使用を許可しますか？";
+
+"Notification" = "通知";
+"Location" = "位置情報";
+
+"New Folder" = "新しいフォルダ";
+"Bookmark" = "ブックマーク";
+
+"Change Name" = "名前を変更";
+"Delete" = "削除";
+"Are you sure you want to clear all search history?" = "すべての検索履歴を削除してもよろしいですか？";
+"Are you sure you want to clear all visit history?" = "閲覧履歴をすべて削除してもよろしいですか？";
+"Add Folder" = "フォルダを追加";
+"Folder" = "フォルダ";
+"Name" = "名前";
+"Save" = "保存";
+
+"System" = "システム";
+"Light" = "ライト";
+"Dark" = "ダーク";
+
+"1 Day" = "1日";
+"1 Week" = "1週間";
+"1 Month" = "1ヶ月";
+"Indefinite" = "無期限";
+
+"Settings" = "設定";
+"General" = "一般";
+"Language" = "言語";
+"Search History" = "検索履歴";
+"Visit History" = "閲覧履歴";
+"Permission" = "権限";
+"Permissions" = "権限設定";
+"Search Engine" = "検索エンジン";
+"Screen Mode" = "画面モード";
+"Retention Period" = "保存期間";
+"Show More" = "さらに表示";
+"Cancel" = "キャンセル";
+"Notification" = "通知";
+"allowed" = "許可";
+"denied" = "拒否";
+"There is no domain with permissions set." = "権限が設定されているドメインはありません。";
+"There is no search history." = "検索履歴はありません。";
+"There is no visit history." = "閲覧履歴はありません。";
+"Blocks unnecessary ads and trackers using DuckDuckGo's tracking protection list along with additional rules." = "DuckDuckGoの追跡保護リストと追加ルールを使用して不要な広告やトラッカーをブロックします。";
+"English" = "英語";
+"Norwegian" = "ノルウェー語";
+"Hindi" = "ヒンディー語";
+"Korean" = "韓国語";
+"Chinese" = "中国語";
+"German" = "ドイツ語";
+"Japanese" = "日本語";
+"Spanish" = "スペイン語";
+"French" = "フランス語";
+"The changes will take effect after restarting the app." = "変更を適用するには、アプリを再起動してください。";
+
+"Add Favorite" = "お気に入りに追加";
+"Edit Favorite" = "お気に入りを編集";
+"Title" = "タイトル";
+"Address" = "アドレス";
+"Add" = "追加";
+
+"Save Image As.." = "画像を別名で保存..";
+"Save As:" = "名前を付けて保存:";
+
+"Tracker Blocking" = "トラッカーブロック";
+"Learn More" = "詳細を見る";
+
+"This connection is secure." = "この接続は安全です。";
+"This is a page provided inside the app." = "これはアプリ内で提供されるページです。";
+"Certificate:" = "証明書:";
+"This connection is not secure." = "この接続は安全ではありません。";
+
+"SSL/TLS certificate error" = "SSL/TLS証明書エラー";
+"A secure connection cannot be made because the certificate is not valid." = "証明書が無効なため、安全な接続を確立できません。";
+
+"Blocked content" = "ブロックされたコンテンツ";
+"This content has been blocked. To use the service, please adjust the tracker blocker level." = "このコンテンツはブロックされました。サービスを利用するには、トラッカーブロッカーのレベルを調整してください。";
+
+"Clear All" = "すべて削除";
+
+"Contact Us" = "お問い合わせ";
+"Zoom In" = "ズームイン";
+"Zoom Out" = "ズームアウト";
+
+"Cookie" = "クッキー";
+"The current web page uses web storage." = "現在のウェブページはWebストレージを使用しています。";
+"The current web page does not use web storage." = "現在のウェブページはWebストレージを使用していません。";
+"Clear Cookies and Storage" = "クッキーとストレージを削除";
+
+"Library" = "ライブラリ";
+
+"Ad Blocking" = "広告ブロック";
+
+"Refresh after clearing cache" = "キャッシュをクリアした後に更新";
+
+"Load More" = "もっと読み込む";
+"No results found." = "結果が見つかりませんでした。";
+"Today" = "今日";
+"Yesterday" = "昨日";

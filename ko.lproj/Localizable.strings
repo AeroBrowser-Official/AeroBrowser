@@ -1,0 +1,150 @@
+"lang" = "ko";
+
+"Opacity" = "Opacity";
+"About Opacity" = "Opacity 정보";
+"Quit Opacity" = "Opacity 종료";
+"File" = "파일";
+"New Window" = "새로운 윈도우";
+"New Tab" = "새로운 탭";
+"Close Window" = "윈도우 닫기";
+"Close Tab" = "탭 닫기";
+"Edit" = "편집";
+"Cut" = "잘라내기";
+"Copy" = "복사";
+"Paste" = "붙여넣기";
+"Select All" = "모두 선택";
+"Find" = "찾기";
+"Find in Page..." = "찾기...";
+"Find Next" = "다음 찾기";
+"Find Previous" = "이전 찾기";
+"View" = "보기";
+"Reload Page" = "페이지 새로고침";
+"Show Sidebar" = "사이드바 보기";
+"Hide Sidebar" = "사이드바 숨기기";
+"Window" = "창";
+"Minimize" = "최소화";
+"Zoom" = "확대";
+
+"Page not found" = "페이지를 찾을 수 없음";
+"The server IP address for '%@' could not be found." = "'%@'의 서버 IP 주소를 찾을 수 없습니다.";
+"Unable to connect to site" = "사이트에 연결할 수 없음";
+"Connection has been reset." = "연결이 재설정되었습니다.";
+"No internet connection" = "인터넷에 연결되어 있지 않음";
+"There is no internet connection." = "인터넷에 연결되어 있지 않습니다.";
+"Unknown error" = "알 수 없는 오류";
+"An unknown error occurred." = "알 수 없는 오류가 발생했습니다.";
+
+"Refresh" = "새로고침";
+
+"Search.." = "검색..";
+
+"Location services are disabled in your Mac system settings" = "Mac 시스템 설정에서 위치 서비스가 사용 중지되었습니다.";
+"Open Settings" = "설정 열기";
+
+"Notification Permissions" = "알림 권한";
+"Notification permission granted." = "알림 권한이 허용되었습니다.";
+
+"Do you want to allow notifications from '%@'?" = "'%@'의 알림을 허용하시겠습니까?";
+"Allow" = "허용";
+"Deny" = "거부";
+
+"Allow '%@' to use your location?" = "'%@'이(가) 위치 정보를 사용하는 것을 허용하시겠습니까?";
+
+"Notification" = "알림";
+"Location" = "위치";
+
+"New Folder" = "새 폴더";
+"Bookmark" = "북마크";
+
+"Change Name" = "이름 변경";
+"Delete" = "삭제";
+"Are you sure you want to clear all search history?" = "검색 내역을 모두 지우시겠습니까?";
+"Are you sure you want to clear all visit history?" = "방문 기록을 모두 지우시겠습니까?";
+"Add Folder" = "폴더 추가";
+"Folder" = "폴더";
+"Name" = "이름";
+"Save" = "저장";
+
+"System" = "시스템";
+"Light" = "라이트";
+"Dark" = "다크";
+
+"1 Day" = "1일";
+"1 Week" = "1주";
+"1 Month" = "1개월";
+"Indefinite" = "무기한";
+
+"Settings" = "설정";
+"General" = "일반";
+"Language" = "언어";
+"Search History" = "검색기록";
+"Visit History" = "방문기록";
+"Permission" = "권한";
+"Permissions" = "권한";
+"Search Engine" = "검색 엔진";
+"Screen Mode" = "화면 모드";
+"Retention Period" = "보관 기간";
+"Show More" = "더보기";
+"Cancel" = "취소";
+"Notification" = "알림";
+"allowed" = "허용됨";
+"denied" = "거부됨";
+"There is no domain with permissions set." = "권한이 설정된 도메인이 없습니다.";
+"There is no search history." = "검색기록이 없습니다.";
+"There is no visit history." = "방문기록이 없습니다.";
+"Blocks unnecessary ads and trackers using DuckDuckGo's tracking protection list along with additional rules." = "DuckDuckGo의 추적 방지 목록과 추가 규칙을 사용하여 불필요한 광고와 추적기를 차단합니다.";
+"English" = "영어";
+"Norwegian" = "노르웨이어";
+"Hindi" = "힌디어";
+"Korean" = "한국어";
+"Chinese" = "중국어";
+"German" = "독일어";
+"Japanese" = "일본어";
+"Spanish" = "스페인어";
+"French" = "프랑스어";
+"The changes will take effect after restarting the app." = "변경 사항은 앱을 다시 시작하면 적용됩니다.";
+
+"Add Favorite" = "즐겨찾기 추가";
+"Edit Favorite" = "즐겨찾기 편집";
+"Title" = "제목";
+"Address" = "주소";
+"Add" = "추가";
+
+"Save Image As.." = "이미지를 다른 이름으로 저장..";
+"Save As:" = "별도 저장:";
+
+"Tracker Blocking" = "트래커 차단";
+"Learn More" = "더 알아보기";
+
+"This connection is secure." = "이 연결은 안전합니다.";
+"This is a page provided inside the app." = "애플리케이션 내부의 페이지입니다.";
+"Certificate:" = "인증서:";
+"This connection is not secure." = "이 연결은 안전하지 않습니다.";
+
+"SSL/TLS certificate error" = "SSL/TLS 인증서 오류";
+"A secure connection cannot be made because the certificate is not valid." = "인증서가 유효하지 않기 때문에 보안 연결을 설정할 수 없습니다.";
+
+"Blocked content" = "차단된 컨텐츠";
+"This content is blocked. To use the service, you must lower or turn off tracker blocking." = "이 콘텐츠는 차단되었습니다. 서비스를 이용하시려면 트래커 차단 수준을 조정해 주세요.";
+
+"Clear All" = "모두 삭제";
+
+"Contact Us" = "문의하기";
+"Zoom In" = "확대";
+"Zoom Out" = "축소";
+
+"Cookie" = "쿠키";
+"The current web page uses web storage." = "현재 웹 페이지는 웹 스토리지를 사용합니다.";
+"The current web page does not use web storage." = "현재 웹 페이지는 웹 스토리지를 사용하지 않습니다.";
+"Clear Cookies and Storage" = "쿠키 및 스토리지 정리";
+
+"Library" = "라이브러리";
+
+"Ad Blocking" = "광고 차단";
+
+"Refresh after clearing cache" = "캐시 삭제 후 새로고침";
+
+"Load More" = "더 보기";
+"No results found." = "결과를 찾을 수 없습니다.";
+"Today" = "오늘";
+"Yesterday" = "어제";

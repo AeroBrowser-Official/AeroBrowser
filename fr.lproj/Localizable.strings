@@ -1,0 +1,150 @@
+"lang" = "fr";
+
+"Opacity" = "Opacity";
+"About Opacity" = "À propos de l'Opacity";
+"Quit Opacity" = "Quitter Opacity";
+"File" = "Fichier";
+"New Window" = "Nouvelle fenêtre";
+"New Tab" = "Nouvel onglet";
+"Close Window" = "Fermer la fenêtre";
+"Close Tab" = "Fermer l'onglet";
+"Edit" = "Édition";
+"Cut" = "Couper";
+"Copy" = "Copier";
+"Paste" = "Coller";
+"Select All" = "Tout sélectionner";
+"Find" = "Rechercher";
+"Find in Page..." = "Rechercher dans la page...";
+"Find Next" = "Rechercher suivant";
+"Find Previous" = "Rechercher précédent";
+"View" = "Affichage";
+"Reload Page" = "Recharger la page";
+"Show Sidebar" = "Afficher la barre latérale";
+"Hide Sidebar" = "Masquer la barre latérale";
+"Window" = "Fenêtre";
+"Minimize" = "Minimiser";
+"Zoom" = "Zoom";
+
+"Page not found" = "Page non trouvée";
+"The server IP address for '%@' could not be found." = "L'adresse IP du serveur pour '%@' n'a pas pu être trouvée.";
+"Unable to connect to site" = "Impossible de se connecter au site";
+"Connection has been reset." = "La connexion a été réinitialisée.";
+"No internet connection" = "Pas de connexion Internet";
+"There is no internet connection." = "Il n'y a pas de connexion Internet.";
+"Unknown error" = "Erreur inconnue";
+"An unknown error occurred." = "Une erreur inconnue est survenue.";
+
+"Refresh" = "Actualiser";
+
+"Search.." = "Rechercher..";
+
+"Location services are disabled in your Mac system settings" = "Les services de localisation sont désactivés dans les paramètres de votre Mac.";
+"Open Settings" = "Ouvrir les paramètres";
+
+"Notification Permissions" = "Autorisations de notification";
+"Notification permission granted." = "Permission de notification accordée.";
+
+"Do you want to allow notifications from '%@'?" = "Voulez-vous autoriser les notifications de '%@' ?";
+"Allow" = "Autoriser";
+"Deny" = "Refuser";
+
+"Allow '%@' to use your location?" = "Autoriser '%@' à utiliser votre position ?";
+
+"Notification" = "Notification";
+"Location" = "Localisation";
+
+"New Folder" = "Nouveau dossier";
+"Bookmark" = "Favori";
+
+"Change Name" = "Modifier le nom";
+"Delete" = "Supprimer";
+"Are you sure you want to clear all search history?" = "Êtes-vous sûr de vouloir effacer tout l'historique de recherche ?";
+"Are you sure you want to clear all visit history?" = "Êtes-vous sûr de vouloir effacer tout l'historique de navigation?";
+"Add Folder" = "Ajouter un dossier";
+"Folder" = "Dossier";
+"Name" = "Nom";
+"Save" = "Enregistrer";
+
+"System" = "Système";
+"Light" = "Clair";
+"Dark" = "Sombre";
+
+"1 Day" = "1 jour";
+"1 Week" = "1 semaine";
+"1 Month" = "1 mois";
+"Indefinite" = "Indéfini";
+
+"Settings" = "Paramètres";
+"General" = "Général";
+"Language" = "Langue";
+"Search History" = "Historique de recherche";
+"Visit History" = "Historique de navigation";
+"Permission" = "Autorisation";
+"Permissions" = "Autorisations";
+"Search Engine" = "Moteur de recherche";
+"Screen Mode" = "Mode d'affichage";
+"Retention Period" = "Période de conservation";
+"Show More" = "Afficher plus";
+"Cancel" = "Annuler";
+"Notification" = "Notification";
+"allowed" = "autorisé";
+"denied" = "refusé";
+"There is no domain with permissions set." = "Aucun domaine avec des autorisations définies.";
+"There is no search history." = "Aucun historique de recherche.";
+"There is no visit history." = "Aucun historique de navigation.";
+"Blocks unnecessary ads and trackers using DuckDuckGo's tracking protection list along with additional rules." = "Bloque les publicités et les traqueurs inutiles en utilisant la liste de protection contre le suivi de DuckDuckGo avec des règles supplémentaires.";
+"English" = "Anglais";
+"Norwegian" = "Norvégien";
+"Hindi" = "Hindi";
+"Korean" = "Coréen";
+"Chinese" = "Chinois";
+"German" = "Allemand";
+"Japanese" = "Japonais";
+"Spanish" = "Espagnol";
+"French" = "Français";
+"The changes will take effect after restarting the app." = "Les modifications prendront effet après le redémarrage de l’application.";
+
+"Add Favorite" = "Ajouter aux favoris";
+"Edit Favorite" = "Modifier le favori";
+"Title" = "Titre";
+"Address" = "Adresse";
+"Add" = "Ajouter";
+
+"Save Image As.." = "Enregistrer l'image sous..";
+"Save As:" = "Enregistrer sous:";
+
+"Tracker Blocking" = "Blocage des traqueurs";
+"Learn More" = "En savoir plus";
+
+"This connection is secure." = "Cette connexion est sécurisée.";
+"This is a page provided inside the app." = "Ceci est une page fournie dans l'application.";
+"Certificate:" = "Certificat:";
+"This connection is not secure." = "Cette connexion n'est pas sécurisée.";
+
+"SSL/TLS certificate error" = "Erreur de certificat SSL/TLS";
+"A secure connection cannot be made because the certificate is not valid." = "Une connexion sécurisée ne peut pas être établie car le certificat n'est pas valide.";
+
+"Blocked content" = "Contenu bloqué";
+"This content has been blocked. To use the service, please adjust the tracker blocker level." = "Ce contenu a été bloqué. Pour utiliser le service, veuillez ajuster le niveau de blocage des traqueurs.";
+
+"Clear All" = "Tout effacer";
+
+"Contact Us" = "Nous contacter";
+"Zoom In" = "Agrandir";
+"Zoom Out" = "Réduire";
+
+"Cookie" = "Cookie";
+"The current web page uses web storage." = "La page Web actuelle utilise le stockage Web.";
+"The current web page does not use web storage." = "La page Web actuelle n'utilise pas le stockage Web.";
+"Clear Cookies and Storage" = "Effacer les cookies et le stockage";
+
+"Library" = "Bibliothèque";
+
+"Ad Blocking" = "Blocage des publicités";
+
+"Refresh after clearing cache" = "Actualiser après avoir vidé le cache";
+
+"Load More" = "Charger plus";
+"No results found." = "Aucun résultat trouvé.";
+"Today" = "Aujourd'hui";
+"Yesterday" = "Hier";
