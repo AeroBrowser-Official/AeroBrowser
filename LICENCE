@@ -1,0 +1,42 @@
+AeroBrowser License v1.0
+© 2025 AeroBrowser Team. All rights reserved.
+
+Permission is hereby granted to any individual to download, install, and use AeroBrowser strictly for personal and non-commercial purposes, subject to the following conditions:
+
+1. Attribution
+   You must retain all copyright notices, credits, and branding included in the original software. Any public demonstration, sharing, or mention of AeroBrowser must credit the AeroBrowser Team as the original creator.
+
+2. Non-Commercial Use Only
+   This software is provided for personal and educational use. Commercial use — including but not limited to selling, sublicensing, bundling, distributing as part of a paid service, monetizing through ads or subscriptions, or using AeroBrowser technology in a commercial product — is strictly prohibited without prior written consent from the AeroBrowser Team.
+
+3. No Redistribution or Resale
+   You may not redistribute AeroBrowser or modified versions of it through your own website, app stores, or file-sharing platforms. Do not resell AeroBrowser, in original or modified form. You may not charge money for providing AeroBrowser to others.
+
+4. No Derivatives or Forks with Branding
+   Modifying, forking, or repackaging AeroBrowser under a different name or design is not permitted if the resulting software:
+   - Uses AeroBrowser’s name, icon, logo, or branding in any way
+   - Imitates the visual style, user interface, feature set, or functionality of AeroBrowser in a misleading way
+   - Is presented as an official, affiliated, or “based on” version of AeroBrowser
+   Creating spoofed, deceptive, or clone projects that mimic AeroBrowser’s appearance or behavior is forbidden.
+
+5. Intellectual Property Protection
+   All components of AeroBrowser — including source code, graphics, interface design, name, logos, and branding — are the intellectual property of the AeroBrowser Team and are protected by international copyright laws.
+
+6. Updates and Auto-Update System
+   AeroBrowser includes an automatic update system using Sparkle. The distributed update files are intended solely for internal update purposes. Users must not manually extract or redistribute update packages. The `.pkg` installer is provided only for clean installations or users who prefer a manual setup.
+
+7. Termination
+   This license is effective until terminated. Violation of any of these terms will result in automatic termination of your rights to use AeroBrowser. In such cases, you must uninstall all copies in your possession.
+
+8. No Warranty
+   AeroBrowser is provided “as is” without warranty of any kind. The AeroBrowser Team is not liable for any damages or data loss arising from the use or inability to use the software.
+
+9. Contact for Exceptions
+   To obtain commercial rights, redistribution permissions, or official partnership, contact the AeroBrowser Team at:
+
+   📧 support@aerobrowser.com
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+By using this software, you agree to all of the above terms and conditions.
+If you do not agree, you are not permitted to use AeroBrowser.
