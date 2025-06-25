@@ -48,6 +48,6 @@ AeroBrowser is distributed as a `.pkg` installer.
 
 > ⚠️ **Do not open or touch the `.zip` update file.**  
 > It is used by **Sparkle auto-updater** internally and may not behave correctly if run manually.  
-> Sparkle update launching is currently **bugged** and will be fixed in v1.0.2.
+> Sparkle update launching is currently **working** but it may be still not perfect.
 
 ---
