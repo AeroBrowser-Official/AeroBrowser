@@ -5,13 +5,28 @@ struct MainView: View {
     @ObservedObject var browser: Browser
 
     @AppStorage("selectedTheme") private var selectedTheme: String = Theme.bluePurple.rawValue
-    private var currentTheme: Theme {
-        Theme(rawValue: selectedTheme) ?? .bluePurple
+    @AppStorage("customThemes") private var customThemesData: Data = Data()
+
+    // Determine the current theme's gradient (built-in or custom)
+    private var currentGradient: LinearGradient {
+        // Built-in match
+        if let theme = Theme.allCases.first(where: { $0.rawValue == selectedTheme }) {
+            return theme.gradient
+        }
+
+        // Custom UUID match
+        if let uuid = UUID(uuidString: selectedTheme),
+           let customThemes = try? JSONDecoder().decode([CustomTheme].self, from: customThemesData),
+           let matched = customThemes.first(where: { $0.id == uuid }) {
+            return matched.gradient
+        }
+
+        return Theme.bluePurple.gradient
     }
 
     var body: some View {
         ZStack {
-            currentTheme.gradient
+            currentGradient
                 .edgesIgnoringSafeArea(.all)
 
             HStack(spacing: 0) {
@@ -24,7 +39,6 @@ struct MainView: View {
                             isFullScreen: .constant(false)
                         )
 
-                        // ✅ Only ONE active tab rendered
                         if let activeId = browser.activeTabId,
                            let tab = browser.tabs.first(where: { $0.id == activeId }) {
                             TabContentView(

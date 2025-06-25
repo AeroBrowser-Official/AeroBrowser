@@ -42,6 +42,7 @@ struct SettingsView: View {
 
 enum SettingsCategory: String, CaseIterable {
   case general = "General"
+    case Theme = "Theme"
   case searchHistory = "Search History"
   case visitHistory = "Visit History"
   case permissions = "Permissions"
@@ -64,8 +65,11 @@ enum SettingsCategory: String, CaseIterable {
       return "shield.lefthalf.filled"
     case .library:
       return "book.closed"
+    case .Theme:
+        return "paintpalette"
     case .About:
         return "info.circle"
+
     }
   }
 }

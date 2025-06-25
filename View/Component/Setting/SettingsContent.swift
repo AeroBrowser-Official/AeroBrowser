@@ -25,6 +25,8 @@ struct SettingsContent: View {
         switch selectedCategory {
         case .general:
           GeneralSettingsView(browser: browser, generalSettings: generalSettings)
+        case .Theme:
+            ThemesSettingsView(browser: browser)
         case .searchHistory:
           SearchHistorySettingsView(browser: browser)
         case .visitHistory:
@@ -35,7 +37,7 @@ struct SettingsContent: View {
           LibrarySettingsView(browser: browser)
         case .About:
             AboutView(browser: browser)
-        }
+      }
         
         Spacer(minLength: 40)
       }

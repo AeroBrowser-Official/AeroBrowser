@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 import Sparkle
+import AppKit
+
 
 
 class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableObject {
@@ -16,7 +18,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
   
   var prevWindow: NSWindow?
   var windowMap: [UUID:NSWindow] = [:]
-  
+    private let whatsNewShownKey = "lastWhatsNewVersion"
+
   var service: Service = Service()
   let windowDelegate = OpacityWindowDelegate()
   
@@ -140,6 +143,30 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
         AppDelegate.shared = self
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
         createWindow()
+        showWhatsNewIfNeeded() // ✅ Shows only on new version
+
+    }
+
+    func showWhatsNewIfNeeded() {
+        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
+        let lastVersion = UserDefaults.standard.string(forKey: whatsNewShownKey)
+
+        if lastVersion != currentVersion {
+            UserDefaults.standard.set(currentVersion, forKey: whatsNewShownKey)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let window = NSWindow(
+                    contentRect: NSRect(x: 0, y: 0, width: 460, height: 600),
+                    styleMask: [.titled, .closable],
+                    backing: .buffered, defer: false
+                )
+                window.center()
+                window.title = "What’s New"
+                window.contentView = NSHostingController(rootView: WhatsNewView(manager: WhatsNewManager())).view
+                window.makeKeyAndOrderFront(nil)
+                NSApp.activate(ignoringOtherApps: true)
+            }
+        }
     }
 
   

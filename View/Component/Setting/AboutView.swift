@@ -4,66 +4,55 @@ struct AboutView: View {
   @ObservedObject var browser: Browser
 
   var body: some View {
-    VStack {
-      VStack(spacing: 24) {
-        Spacer(minLength: 4)
-        
-        // Logo
-        Image("Logo")
-          .resizable()
-          .frame(width: 72, height: 72)
-          .clipShape(RoundedRectangle(cornerRadius: 16))
-          .shadow(radius: 8)
+    VStack(spacing: 32) {
+      VStack(alignment: .leading, spacing: 24) {
+        Text("About")
+          .font(.system(size: 24, weight: .semibold))
+          .foregroundColor(Color("UIText"))
+          .padding(.bottom, 6)
 
-        // App Name + Version
-        VStack(spacing: 4) {
-          Text("AeroBrowser")
-            .font(.system(size: 22, weight: .semibold, design: .rounded))
-            .foregroundColor(Color("UIText"))
+        // Logo & Version Info
+        HStack(alignment: .center, spacing: 16) {
+          Image("Logo")
+            .resizable()
+            .frame(width: 72, height: 72)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(radius: 8)
 
-          if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            Text("Version \(version)")
-              .font(.system(size: 14, weight: .medium))
-              .foregroundColor(Color("UIText").opacity(0.6))
+          VStack(alignment: .leading, spacing: 4) {
+            Text("AeroBrowser")
+              .font(.system(size: 22, weight: .semibold, design: .rounded))
+              .foregroundColor(Color("UIText"))
+
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+              Text("Version \(version)")
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(Color("UIText").opacity(0.6))
+            }
           }
         }
 
-        Divider().background(Color.white.opacity(0.08)).padding(.horizontal, 40)
-
-        // Links centered
-        VStack(spacing: 12) {
-          AboutLinkRow(title: "GitHub Repository", link: "https://github.com/aerobrowser/aerobrowser", browser: browser)
-          AboutLinkRow(title: "Licenses", link: "https://github.com/aerobrowser/aerobrowser/blob/main/LICENSE", browser: browser)
-          AboutLinkRow(title: "Contact / Feedback", link: "mailto:support@aerobrowser.com", browser: browser)
+        // Links
+        VStack(spacing: 16) {
+          AboutInfoRow(title: "GitHub Repository", link: "https://github.com/aerobrowser/aerobrowser", browser: browser)
+          AboutInfoRow(title: "Licenses", link: "https://github.com/aerobrowser/aerobrowser/blob/main/LICENSE", browser: browser)
+          AboutInfoRow(title: "Contact / Feedback", link: "mailto:support@aerobrowser.com", browser: browser)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 40)
-        .multilineTextAlignment(.center)
-
-        Divider().background(Color.white.opacity(0.08)).padding(.horizontal, 40)
-
-        // Footer
-        Text("© 2025 AeroBrowser Team")
-          .font(.system(size: 11))
-          .foregroundColor(Color("UIText").opacity(0.4))
       }
-      .padding(8)
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(
-        RoundedRectangle(cornerRadius: 20)
-          .fill(Color("InputBG").opacity(0.5))
-          .overlay(
-            RoundedRectangle(cornerRadius: 20)
-              .stroke(Color.white.opacity(0.05), lineWidth: 1)
-          )
-      )
-      .shadow(color: .black.opacity(0.15), radius: 10, x: 0, y: 6)
+
+      Spacer()
+
+      // Footer
+      Text("© 2025 AeroBrowser Team")
+        .font(.system(size: 11))
+        .foregroundColor(Color("UIText").opacity(0.4))
     }
-    .padding(16)
+    .padding(.horizontal, 24)
+    .padding(.top, 32)
   }
 }
 
-struct AboutLinkRow: View {
+struct AboutInfoRow: View {
   let title: String
   let link: String
   @ObservedObject var browser: Browser
@@ -74,17 +63,18 @@ struct AboutLinkRow: View {
         browser.newTab(url)
       }
     }) {
-      HStack(spacing: 8) {
-        Image(systemName: "arrow.up.right.square")
-          .font(.system(size: 12))
-        Text(title)
-          .font(.system(size: 13, weight: .medium))
-      }
-      .frame(maxWidth: .infinity)
-      .foregroundColor(Color("Point"))
-      .multilineTextAlignment(.center)
+      Text(title)
+        .font(.system(size: 14, weight: .medium))
+        .foregroundColor(Color("Point"))
+        .underline()
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     .buttonStyle(.plain)
     .padding(.horizontal, 16)
+    .padding(.vertical, 16)
+    .background(
+      RoundedRectangle(cornerRadius: 8)
+        .fill(Color("InputBG").opacity(0.5))
+    )
   }
 }
