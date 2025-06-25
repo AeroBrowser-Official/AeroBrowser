@@ -51,10 +51,3 @@ AeroBrowser is distributed as a `.pkg` installer.
 > Sparkle update launching is currently **bugged** and will be fixed in v1.0.2.
 
 ---
-
-## 🛠️ Build Instructions
-
-```bash
-git clone https://github.com/aerobrowser/aerobrowser.git
-cd aerobrowser
-open AeroBrowser.xcodeproj
