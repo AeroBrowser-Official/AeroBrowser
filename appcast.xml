@@ -3,6 +3,58 @@
     <channel>
         <title>AeroBrowser</title>
         <item>
+            <title>1.0.2</title>
+            <pubDate>Wed, 25 Jun 2025 18:47:43 +0200</pubDate>
+            <sparkle:version>1.0.2</sparkle:version>
+            <description><![CDATA[
+                <p align="center">
+                  <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
+                </p>
+
+                <h2>v1.0.2 Release</h2>
+
+                <h3>What’s New</h3>
+
+                - 🎨 Redesigned About Page: A more refined layout with improved spacing and clean visuals.
+                - 🗒️ New “What’s New” Page: Easily view changelogs and version highlights inside the app.
+                - 🌈 Theme Page Overhaul: You can now browse and select themes using a better dropdown picker.
+
+                <h3>Fixes</h3>
+
+                - 🔧 Real Sparkle Fix: Auto-updates are now more reliable.
+                - 🐞 Minor bug fixes across UI, including layout glitches and logic inconsistencies.
+
+                <h3>Notes</h3>
+
+                - This release builds on v1.0.1 and v1.0.0 which introduced:
+                  - ✅ Ad-blocking
+                  - 📚 Bookmarks
+                  - 🧠 Search history
+                  - 🧹 Reset options
+                  - 🔍 Custom search engines
+                  - ⚡ Sparkle updater
+                  - ✨ New polished UI
+                - v1.0.2 improves internal consistency and user polish across the whole experience.
+
+                Bugs? Glitches? Please report them on the [GitHub Issues tab](https://github.com/aerobrowser/aerobrowser/issues)!
+
+                <h3>Logo</h3>
+
+                <p align="center">
+                  <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
+                </p>
+
+                                    ]]>
+                                    </description>
+            <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/AeroBrowser-Official/AeroBrowser/releases/download/v1.0.2/ForUpdateDoNotTouch1.0.2.zip" length="4191197" type="application/octet-stream" sparkle:edSignature="aAhK2SKxboBFSg/aA8epkmiIagtRy/7l/joV81qw3ufL/pBmLc95xzzLVp7fm1mJ5I5+zKNKS1jt3tJWwe3EAg=="/>
+            <sparkle:deltas>
+                <enclosure url="https://aerobrowser-official.github.io/AeroBrowser/AeroBrowser1.0.2-1.0.1.delta" sparkle:deltaFrom="1.0.1" length="384810" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="846480" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="RdQ3KTmrC8LrXKcOwyhNSruUbj2WENLI3oqekCy2rC8AHxl81AFxNmRcOaOMcrZLctqhY4HHCf630IBl7KGxCA=="/>
+                <enclosure url="https://aerobrowser-official.github.io/AeroBrowser/AeroBrowser1.0.2-1.delta" sparkle:deltaFrom="1" length="409526" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="846480" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="f2E7yGXDyS8I6GfgrLdMWyMcz26OZTEIPWBRcitl5Cl89KC9u33BRnBNekZp1jHQcDQck5ywCBrnVPLKkIDoAQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.0.1</title>
             <pubDate>Tue, 24 Jun 2025 23:03:55 +0200</pubDate>
             <sparkle:version>1.0.1</sparkle:version>
@@ -50,48 +102,49 @@
             <pubDate>Tue, 24 Jun 2025 17:57:29 +0200</pubDate>
             <sparkle:version>1</sparkle:version>
             <description><![CDATA[
+                <p align="center">
+                                          <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
+                                        </p>
+
+                                        <h2>v1.0.0 Release</h2>
+
+                                        <h3>Whats New</h3>
+
+                                        We remade the whole project and app with a new design and features including the following:
+
+                                        - Ad Blocker
+                                        - Bookmarks Support
+                                        - Search History
+                                        - Custom Search Engine (choosing from Google Bing Yahoo etc etc...)
+                                        - Option to reset or delete browser history in a certain days/weeks
+                                        - Upgraded Sparkle Package
+                                        - New UI
+                                        - Better searching Logic and core
+                                        - browser like logic(to prevent Google Flagging the browser with Googles Captchas
+                                        - and many more
+
+                                         <h3>Note That</h3>
+
+                                        Version 1.0.0 is not considered alpha or beta anymore but note that there might still be bugs and issues please make issues in GitHub repo for us to know what to fix.
+
+
+                                         <h3>Screenshots</h3>
+
+
+                                        ![Screenshot 2025-06-24 at 16 12 34](https://github.com/user-attachments/assets/b96d92d1-5e28-44ae-873f-93f4337bf26f)
+                                        ![Screenshot 2025-06-24 at 16 12 50](https://github.com/user-attachments/assets/5e71dca1-a3d6-4978-82db-e8cff5594d7d)
+
+                                         <h3>New Logo</h3>
+
                                         <p align="center">
-                          <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
-                        </p>
+                                          <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
+                                        </p>
 
-                        <h2>v1.0.0 Release</h2>
-
-                        <h3>Whats New</h3>
-
-                        We remade the whole project and app with a new design and features including the following:
-
-                        - Ad Blocker
-                        - Bookmarks Support
-                        - Search History
-                        - Custom Search Engine (choosing from Google Bing Yahoo etc etc...)
-                        - Option to reset or delete browser history in a certain days/weeks
-                        - Upgraded Sparkle Package
-                        - New UI
-                        - Better searching Logic and core
-                        - browser like logic(to prevent Google Flagging the browser with Googles Captchas
-                        - and many more
-
-                         <h3>Note That</h3>
-
-                        Version 1.0.0 is not considered alpha or beta anymore but note that there might still be bugs and issues please make issues in GitHub repo for us to know what to fix.
-
-
-                         <h3>Screenshots</h3>
-
-
-                        ![Screenshot 2025-06-24 at 16 12 34](https://github.com/user-attachments/assets/b96d92d1-5e28-44ae-873f-93f4337bf26f)
-                        ![Screenshot 2025-06-24 at 16 12 50](https://github.com/user-attachments/assets/5e71dca1-a3d6-4978-82db-e8cff5594d7d)
-
-                         <h3>New Logo</h3>
-
-                        <p align="center">
-                          <img src="https://github.com/user-attachments/assets/3d63fb0d-d961-47ea-bcdd-81394bdc70f4" alt="AeroBrowser Logo" width="250"/>
-                        </p>
                                     ]]>
                                     </description>
             <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/AeroBrowser-Official/AeroBrowser/releases/download/v1.0.0/ForUpdateDoNotTouch.zip" length="4138701" type="application/octet-stream" sparkle:edSignature="wnO7t+I7AAOJHqIaTchrCkn/UyDd4CIkrfa81TfPuOaD3/u0ihhQZ/EfEJOZHSHeukGx+ONTxULVVafUVVZZBQ=="/>
+            <enclosure url="https://github.com/AeroBrowser-Official/AeroBrowser/releases/download/v1.0.0/ForUpdateDoNotTouch1.0.0.zip" length="4138701" type="application/octet-stream" sparkle:edSignature="wnO7t+I7AAOJHqIaTchrCkn/UyDd4CIkrfa81TfPuOaD3/u0ihhQZ/EfEJOZHSHeukGx+ONTxULVVafUVVZZBQ=="/>
         </item>
     </channel>
 </rss>
