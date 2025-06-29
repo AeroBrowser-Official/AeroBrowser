@@ -34,9 +34,9 @@ struct AboutView: View {
 
         // Links
         VStack(spacing: 16) {
-          AboutInfoRow(title: "GitHub Repository", link: "https://github.com/aerobrowser/aerobrowser", browser: browser)
-          AboutInfoRow(title: "Licenses", link: "https://github.com/aerobrowser/aerobrowser/blob/main/LICENSE", browser: browser)
-          AboutInfoRow(title: "Contact / Feedback", link: "mailto:support@aerobrowser.com", browser: browser)
+          AboutInfoRow(title: "GitHub Repository", link: "https://github.com/AeroBrowser-Official/AeroBrowser", browser: browser)
+          AboutInfoRow(title: "Licenses", link: "https://github.com/AeroBrowser-Official/AeroBrowser/blob/main/LICENSE", browser: browser)
+          AboutInfoRow(title: "Contact / Feedback", link: "https://aerobrowser.pages.dev/support", browser: browser)
         }
       }
 

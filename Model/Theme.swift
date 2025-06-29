@@ -9,11 +9,12 @@ enum Theme: String, CaseIterable, Identifiable {
     case icyMist = "Icy Mist"
     case forestBloom = "Forest Bloom"
     case velvetDusk = "Velvet Dusk"
+    case custom = "Custom Theme"
+
 
     var id: String { rawValue }
 
-    var gradient: LinearGradient {
-        switch self {
+    func gradient(customColor1: Color = .black, customColor2: Color = .black, CustomRotation: String = "") -> LinearGradient {        switch self {
         case .bluePurple: // Aurora
             return LinearGradient(colors: [Color.blue, Color.purple], startPoint: .top, endPoint: .bottom)
         case .greenYellow: // Solar Flare
@@ -30,6 +31,17 @@ enum Theme: String, CaseIterable, Identifiable {
             return LinearGradient(colors: [Color.green.opacity(0.6), Color.brown], startPoint: .top, endPoint: .bottom)
         case .velvetDusk:
             return LinearGradient(colors: [Color.purple, Color.black], startPoint: .top, endPoint: .bottom)
+    case .custom:
+                if CustomRotation == "diagsxdx"{
+                    return LinearGradient(colors: [customColor1, customColor2], startPoint: .topLeading, endPoint: .bottomTrailing)
+                } else if CustomRotation == "sxdx"{
+                    return LinearGradient(colors: [customColor1, customColor2], startPoint: .leading, endPoint: .trailing)
+                } else if CustomRotation == "diagdxsx" {
+                    return LinearGradient(colors: [customColor1, customColor2], startPoint: .topTrailing, endPoint: .bottomLeading)
+                } else {    //Top-bottom
+                    return LinearGradient(colors: [customColor1, customColor2], startPoint: .top, endPoint: .bottom)
+
+                }
         }
     }
 }

@@ -11,7 +11,10 @@ struct MainView: View {
     private var currentGradient: LinearGradient {
         // Built-in match
         if let theme = Theme.allCases.first(where: { $0.rawValue == selectedTheme }) {
-            return theme.gradient
+            if theme == .custom {
+                            return theme.gradient(customColor1: browser.customColor1, customColor2: browser.customColor2, CustomRotation: browser.customPosition)
+                        }
+                        return theme.gradient()
         }
 
         // Custom UUID match
@@ -21,7 +24,7 @@ struct MainView: View {
             return matched.gradient
         }
 
-        return Theme.bluePurple.gradient
+        return Theme.bluePurple.gradient()
     }
 
     var body: some View {

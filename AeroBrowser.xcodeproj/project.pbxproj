@@ -461,7 +461,7 @@
 		A1691FFF2B2FA82100F8B4C0 = {
 			isa = PBXGroup;
 			children = (
-				A169200A2B2FA82100F8B4C0 /* Opacity */,
+				A169200A2B2FA82100F8B4C0 /* AeroBrowser */,
 				A16920092B2FA82100F8B4C0 /* Products */,
 				A17C97622BD293C7009240B9 /* Frameworks */,
 			);
@@ -475,7 +475,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A169200A2B2FA82100F8B4C0 /* Opacity */ = {
+		A169200A2B2FA82100F8B4C0 /* AeroBrowser */ = {
 			isa = PBXGroup;
 			children = (
 				A19891452DE20EE800DD07DA /* Extensions */,
@@ -493,7 +493,7 @@
 				A1A1D8DA2B62B6BB008FD44F /* Localizable.strings */,
 				A16920112B2FA82200F8B4C0 /* Preview Content */,
 			);
-			name = Opacity;
+			name = AeroBrowser;
 			sourceTree = "<group>";
 		};
 		A16920112B2FA82200F8B4C0 /* Preview Content */ = {
