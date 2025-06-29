@@ -1,17 +1,10 @@
-//
-//  OpacityApp.swift
-//  Opacity
-//
-//  Created by Falsy on 1/7/24.
-//
-
 import SwiftUI
 import Sparkle
 
 
 
 @main
-struct OpacityApp: App {
+struct AeroBrowserApp: App {
   
   // Initialize Sparkle only for macOS
   private let updaterController: SPUStandardUpdaterController

@@ -25,7 +25,7 @@ final class Browser: ObservableObject, Identifiable {
     @Published var customColor1: Color = .black
       @Published var customColor2: Color = .black
         @Published var theme: Theme = .bluePurple
-        @Published var customPosition: String = "tb"
+        @Published var customPosition: String = "diagdxsx"
 
 
   @Published var searchBoxRect: CGRect?
@@ -33,6 +33,10 @@ final class Browser: ObservableObject, Identifiable {
   init(service: Service, windowNumber: Int, tabId: UUID? = nil) {
     self.id = UUID()
     self.windowNumber = windowNumber
+      customColor1 = Color(hex: UserDefaults.standard.string(forKey: "customColor1Hex") ?? "#000000")
+      customColor2 = Color(hex: UserDefaults.standard.string(forKey: "customColor2Hex") ?? "#000000")
+      customPosition = UserDefaults.standard.string(forKey: "customDirection") ?? "topbottom"
+
     if let tabId = tabId {
       self.moveNewBrowserTab(service: service, tabId: tabId)
     } else {
