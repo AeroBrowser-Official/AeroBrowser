@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.1-blueviolet?style=flat-square" />
+<img src="https://img.shields.io/github/v/release/AeroBrowser-Official/AeroBrowser?style=flat-square&label=latest&color=blueviolet" />
   <img src="https://img.shields.io/badge/AeroBrowser License v1.0-red?style=flat-square" />
   <img src="https://img.shields.io/badge/macOS-14+-lightgrey?style=flat-square" />
 </p>
@@ -49,5 +49,13 @@ AeroBrowser is distributed as a `.pkg` installer.
 > ⚠️ **Do not open or touch the `.zip` update file.**  
 > It is used by **Sparkle auto-updater** internally and may not behave correctly if run manually.  
 > Sparkle update launching is currently **bugged** and will be fixed in v1.0.2.
+
+---
+
+## 🙏 Acknowledgements
+
+Parts of this project were inspired by or based on code from the [Opacity browser](https://github.com/Falsy/Opacity) by [Falsy](https://github.com/Falsy), licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+We thank them for their excellent open-source contribution, which made certain foundational elements of AeroBrowser possible.
 
 ---
