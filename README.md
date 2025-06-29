@@ -9,7 +9,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/github/v/release/AeroBrowser-Official/AeroBrowser?style=flat-square&label=latest&color=blueviolet" />
-  <img src="https://img.shields.io/badge/AeroBrowser License v1.0-red?style=flat-square" />
+<img src="https://img.shields.io/github/license/AeroBrowser-Official/AeroBrowser?style=flat-square&color=red" />
   <img src="https://img.shields.io/badge/macOS-14+-lightgrey?style=flat-square" />
 </p>
 
