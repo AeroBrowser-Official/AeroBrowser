@@ -1,6 +1,6 @@
 //
 //  StringURL.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/10/24.
 //
@@ -35,7 +35,7 @@ class StringURL {
   }
   
   static func checkURL(url urlString: String) -> Bool {
-    if(urlString.contains("opacity://")) {
+    if(urlString.contains("aerobrowser://")) {
       return true
     }
     
@@ -55,7 +55,7 @@ class StringURL {
   }
   
   static func setInputURL(_ url: URL) -> String  {
-    if let host = url.host, url.scheme == "opacity" {
+    if let host = url.host, url.scheme == "aerobrowser" {
       if host == "new-tab" {
         return ""
       }
@@ -65,7 +65,7 @@ class StringURL {
   
   static func setPrintURL(_ url: URL) -> String  {
     let stringURL = url.absoluteString
-    if let host = url.host, url.scheme == "opacity" {
+    if let host = url.host, url.scheme == "aerobrowser" {
       if host == "new-tab" {
         return ""
       }

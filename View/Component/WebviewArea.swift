@@ -1,6 +1,6 @@
 //
 //  WebviewArea.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/11/24.
 //
@@ -34,6 +34,6 @@ struct WebviewArea: View {
         MainWebView(service: service, browser: browser, tab: tab)
       }
     }
-    .background(tab.originURL.scheme == "opacity" ? Color("SearchBarBG") : .white)
+    .background(tab.originURL.scheme == "aerobrowser" ? Color("SearchBarBG") : .white)
   }
 }

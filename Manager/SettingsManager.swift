@@ -1,6 +1,6 @@
 //
 //  SettingsManager.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/5/24.
 //
@@ -13,7 +13,7 @@ class SettingsManager {
     var descriptor = FetchDescriptor<GeneralSetting>()
     descriptor.fetchLimit = 1
     do {
-      if let generalSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let generalSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         return generalSettings
       }
     } catch {
@@ -27,7 +27,7 @@ class SettingsManager {
     descriptor.fetchLimit = 1
     if let searchEngine = SearchEngineList(rawValue: value) {
       do {
-        if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           browserSettings.searchEngine = searchEngine.rawValue
         }
       } catch {
@@ -41,7 +41,7 @@ class SettingsManager {
     descriptor.fetchLimit = 1
     if let screenMode = ScreenModeList(rawValue: value) {
       do {
-        if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           browserSettings.screenMode = screenMode.rawValue
         }
       } catch {
@@ -55,7 +55,7 @@ class SettingsManager {
     descriptor.fetchLimit = 1
     if let period = DataRententionPeriodList(rawValue: value) {
       do {
-        if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           browserSettings.retentionPeriod = period.rawValue
         }
       } catch {
@@ -68,7 +68,7 @@ class SettingsManager {
     var descriptor = FetchDescriptor<GeneralSetting>()
     descriptor.fetchLimit = 1
     do {
-      if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         browserSettings.isTrackerBlocking = value
       }
     } catch {
@@ -82,7 +82,7 @@ class SettingsManager {
     descriptor.fetchLimit = 1
     if let blockingTracker = BlockingTrakerList(rawValue: value) {
       do {
-        if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           browserSettings.blockingLevel = blockingTracker.rawValue
         }
       } catch {
@@ -96,7 +96,7 @@ class SettingsManager {
     var descriptor = FetchDescriptor<GeneralSetting>()
     descriptor.fetchLimit = 1
     do {
-      if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         browserSettings.adBlocking = value
       }
     } catch {

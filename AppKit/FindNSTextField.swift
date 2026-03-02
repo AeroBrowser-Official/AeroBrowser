@@ -1,6 +1,6 @@
 //
 //  FindNSTextField.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/20/24.
 //

@@ -1,6 +1,6 @@
 //
 //  CleanCommands.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 12/13/24.
 //

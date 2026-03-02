@@ -1,6 +1,6 @@
 //
 //  TabAreaView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/14/24.
 //

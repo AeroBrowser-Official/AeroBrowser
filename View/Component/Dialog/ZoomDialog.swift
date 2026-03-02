@@ -1,6 +1,6 @@
 //
 //  ZoomDialog.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/10/24.
 //

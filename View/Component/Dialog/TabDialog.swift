@@ -1,6 +1,6 @@
 //
 //  TabDialog.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/15/24.
 //

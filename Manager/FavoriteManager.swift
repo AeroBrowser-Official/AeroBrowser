@@ -1,6 +1,6 @@
 //
 //  FavoriteManager.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/5/24.
 //
@@ -13,7 +13,7 @@ class FavoriteManager {
     var descriptor = FetchDescriptor<Favorite>()
     descriptor.fetchLimit = 5
     do {
-      return try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      return try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
     } catch {
       print("ModelContainerError getFavoriteList")
     }
@@ -22,8 +22,8 @@ class FavoriteManager {
   
   @MainActor static func addFavorite(_ favorite: Favorite) -> Bool {
     do {
-      AppDelegate.shared.opacityModelContainer.mainContext.insert(favorite)
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      AppDelegate.shared.modelContainer.mainContext.insert(favorite)
+      try AppDelegate.shared.modelContainer.mainContext.save()
       return true
     } catch {
       print("ModelContainerError addFavorite")
@@ -38,9 +38,9 @@ class FavoriteManager {
       )
       descriptor.fetchLimit = 1
       do {
-        if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
-          AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-          try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
+          AppDelegate.shared.modelContainer.mainContext.delete(target)
+          try AppDelegate.shared.modelContainer.mainContext.save()
           return true
         }
       } catch {
@@ -56,10 +56,10 @@ class FavoriteManager {
     )
     descriptor.fetchLimit = 1
     do {
-      if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         target.title = newTitle
         target.address = newAddress
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        try AppDelegate.shared.modelContainer.mainContext.save()
         return true
       }
     } catch {

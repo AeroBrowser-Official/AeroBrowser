@@ -34,11 +34,11 @@ struct TabContentView: View {
                     }
                 }
             } else {
-                // ✅ This is your ONLY WebView render — no ZStack, no duplicate
                 WebviewArea(service: service, browser: browser, tab: tab)
-                    .cornerRadius(20)
-                    .padding([.leading, .trailing, .bottom], 10)
-                    .shadow(radius: 5)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .shadow(color: .black.opacity(0.12), radius: 8, y: 2)
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
             }
         }
         .offset(y: isActive ? 0 : geometryHeight + 1)

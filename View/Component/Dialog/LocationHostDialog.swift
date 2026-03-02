@@ -1,6 +1,6 @@
 //
 //  LocationHostDialog.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 8/11/24.
 //
@@ -34,10 +34,12 @@ struct LocationHostDialog: View {
             $0.domain == host && $0.permission == DomainPermissionType.geoLocation.rawValue
           }) else {
             modelContext.insert(DomainPermission(domain: host, permission: DomainPermissionType.geoLocation.rawValue, isDenied: false))
+            try? modelContext.save()
             onClose()
             return
           }
           domainLocation.isDenied = false
+          try? modelContext.save()
           onClose()
         } label: {
           Text(NSLocalizedString("Allow", comment: ""))
@@ -53,11 +55,13 @@ struct LocationHostDialog: View {
           guard let domainLocation = self.domainPermission.first(where: {
             $0.domain == host && $0.permission == DomainPermissionType.geoLocation.rawValue
           }) else {
-            modelContext.insert(DomainPermission(domain: host, permission: DomainPermissionType.notification.rawValue, isDenied: true))
+            modelContext.insert(DomainPermission(domain: host, permission: DomainPermissionType.geoLocation.rawValue, isDenied: true))
+            try? modelContext.save()
             onClose()
             return
           }
           domainLocation.isDenied = true
+          try? modelContext.save()
           onClose()
         } label: {
           Text(NSLocalizedString("Deny", comment: ""))

@@ -1,6 +1,6 @@
 //
 //  MainWebViewCoordinator.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //
@@ -34,6 +34,7 @@ class MainWebViewCoordinator: NSObject {
     // Coordinator 간 의존성 설정
     navigationCoordinator.sslCertificateCoordinator = sslCertificateCoordinator
     navigationCoordinator.geoLocationCoordinator = geoLocationCoordinator
+    navigationCoordinator.downloadCoordinator = downloadCoordinator
   }
   
   deinit {

@@ -1,263 +1,111 @@
 //
 //  MoreMenuDialog.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/27/24.
 //
 
 import SwiftUI
 
-struct MoreMenuDialog: View {
-  @ObservedObject var browser: Browser
-  @ObservedObject var tab: Tab
-  @Binding var isMoreMenuDialog: Bool
-  
-  @State private var isContactHover: Bool = false
-  @State private var isZoomInHover: Bool = false
-  @State private var isZoomOutHover: Bool = false
-  @State private var isNewTabHover: Bool = false
-  @State private var isNewWindowHover: Bool = false
-  @State private var isSettingHover: Bool = false
-  
-  var body: some View {
-    VStack(spacing: 0) {
-      VStack(spacing: 0) {
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "envelope")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 13))
-              .foregroundColor(Color("Icon"))
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("Contact Us", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
+// MARK: - Reusable menu row
+private struct MenuRow: View {
+    let icon: String
+    let title: String
+    var shortcutKey: String? = nil
+    var shortcutModifier: String? = "command"
+    let action: () -> Void
+    
+    @State private var isHovered = false
+    
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(.system(size: 12))
+                    .foregroundColor(Color("Icon"))
+                    .frame(width: 16)
+                
+                Text(title)
+                    .font(.system(size: 12))
+                    .foregroundColor(Color("UIText"))
+                
+                Spacer()
+                
+                if let key = shortcutKey {
+                    HStack(spacing: 2) {
+                        if shortcutModifier == "command" {
+                            Image(systemName: "command")
+                                .font(.system(size: 9))
+                        }
+                        Text(key)
+                            .font(.system(size: 10, weight: .medium, design: .rounded))
+                    }
+                    .foregroundColor(Color("Icon").opacity(0.45))
+                }
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(isHovered ? Color("UIText").opacity(0.07) : .clear)
+            )
+            .contentShape(Rectangle())
         }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isContactHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isContactHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            NSWorkspace.shared.open(URL(string: "mailto:")!)
-            isMoreMenuDialog = false
-          }
-        }
-        
-        
-        Divider()
-          .padding(.vertical, 4)
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "plus.magnifyingglass")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 13))
-              .foregroundColor(Color("Icon"))
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("Zoom In", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
-          Image(systemName: "command")
-            .frame(maxWidth: 14, maxHeight: 14)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 11))
-            .opacity(0.4)
-          Text("+")
-            .frame(width: 8)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 12))
-            .opacity(0.4)
-            .offset(y: -1)
-        }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isZoomInHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isZoomInHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            tab.isZoomDialog = true
-            tab.zoomLevel = ((tab.zoomLevel * 10) + 1) / 10
-            isMoreMenuDialog = false
-          }
-        }
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "minus.magnifyingglass")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 13))
-              .foregroundColor(Color("Icon"))
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("Zoom Out", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
-          Image(systemName: "command")
-            .frame(maxWidth: 14, maxHeight: 14)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 11))
-            .opacity(0.4)
-          Text("-")
-            .foregroundColor(Color("Icon"))
-            .frame(width: 8)
-            .font(.system(size: 12))
-            .opacity(0.4)
-            .offset(y: -1)
-        }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isZoomOutHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isZoomOutHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            tab.isZoomDialog = true
-            tab.zoomLevel = ((tab.zoomLevel * 10) - 1) / 10
-            isMoreMenuDialog = false
-          }
-        }
-        
-        Divider()
-          .padding(.vertical, 4)
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "rectangle.badge.plus")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 13))
-              .foregroundColor(Color("Icon"))
-              .offset(y: 1)
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("New Tab", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
-          Image(systemName: "command")
-            .frame(maxWidth: 14, maxHeight: 14)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 11))
-            .opacity(0.4)
-          Text("T")
-            .frame(width: 8)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 12))
-            .opacity(0.4)
-        }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isNewTabHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isNewTabHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            browser.initTab()
-            isMoreMenuDialog = false
-          }
-        }
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "macwindow.badge.plus")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 13))
-              .foregroundColor(Color("Icon"))
-              .offset(y: 1)
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("New Window", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
-          Image(systemName: "command")
-            .frame(maxWidth: 14, maxHeight: 14)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 11))
-            .opacity(0.4)
-          Text("N")
-            .frame(width: 8)
-            .foregroundColor(Color("Icon"))
-            .font(.system(size: 12))
-            .opacity(0.4)
-        }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isNewWindowHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isNewWindowHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            AppDelegate.shared.newWindow()
-            isMoreMenuDialog = false
-          }
-        }
-        
-        Divider()
-          .padding(.vertical, 4)
-        
-        HStack(spacing: 0) {
-          VStack(spacing: 0) {
-            Image(systemName: "gearshape")
-              .frame(maxWidth: 14, maxHeight: 14)
-              .font(.system(size: 14))
-              .foregroundColor(Color("Icon"))
-          }
-          .frame(maxWidth: 20, maxHeight: 20)
-          .padding(.leading, 5)
-          Text(NSLocalizedString("Settings", comment: ""))
-            .font(.system(size: 12))
-            .padding(.leading, 5)
-          Spacer()
-        }
-        .padding(5)
-        .padding(.vertical, 2)
-        .onHover { hovering in
-          isSettingHover = hovering
-        }
-        .background(Color("SearchBarBG").opacity(isSettingHover ? 0.5 : 0))
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .onTapGesture {
-          DispatchQueue.main.async {
-            browser.openSettings()
-            isMoreMenuDialog = false
-          }
-        }
-        
-      }
-      .padding(5)
+        .buttonStyle(.plain)
+        .onHover { isHovered = $0 }
     }
-    .frame(width: 220)
-    .background(GeometryReader { geometry in
-      Color("DialogBG")
-          .frame(width: geometry.size.width,
-                  height: geometry.size.height + 100)
-          .frame(width: geometry.size.width,
-                  height: geometry.size.height,
-                  alignment: .bottom)
-    })
-  }
+}
+
+struct MoreMenuDialog: View {
+    @ObservedObject var browser: Browser
+    @ObservedObject var tab: Tab
+    @Binding var isMoreMenuDialog: Bool
+    
+    var body: some View {
+        VStack(spacing: 2) {
+            MenuRow(icon: "envelope", title: NSLocalizedString("Contact Us", comment: "")) {
+                NSWorkspace.shared.open(URL(string: "mailto:")!)
+                isMoreMenuDialog = false
+            }
+            
+            Divider().padding(.vertical, 3)
+            
+            MenuRow(icon: "plus.magnifyingglass", title: NSLocalizedString("Zoom In", comment: ""), shortcutKey: "+") {
+                tab.isZoomDialog = true
+                tab.zoomLevel = ((tab.zoomLevel * 10) + 1) / 10
+                isMoreMenuDialog = false
+            }
+            
+            MenuRow(icon: "minus.magnifyingglass", title: NSLocalizedString("Zoom Out", comment: ""), shortcutKey: "–") {
+                tab.isZoomDialog = true
+                tab.zoomLevel = ((tab.zoomLevel * 10) - 1) / 10
+                isMoreMenuDialog = false
+            }
+            
+            Divider().padding(.vertical, 3)
+            
+            MenuRow(icon: "rectangle.badge.plus", title: NSLocalizedString("New Tab", comment: ""), shortcutKey: "T") {
+                browser.initTab()
+                isMoreMenuDialog = false
+            }
+            
+            MenuRow(icon: "macwindow.badge.plus", title: NSLocalizedString("New Window", comment: ""), shortcutKey: "N") {
+                AppDelegate.shared.newWindow()
+                isMoreMenuDialog = false
+            }
+            
+            Divider().padding(.vertical, 3)
+            
+            MenuRow(icon: "gearshape", title: NSLocalizedString("Settings", comment: "")) {
+                browser.openSettings()
+                isMoreMenuDialog = false
+            }
+        }
+        .padding(6)
+        .frame(width: 210)
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color("DialogBG"))
+        )
+    }
 }

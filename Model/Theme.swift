@@ -14,22 +14,46 @@ enum Theme: String, CaseIterable, Identifiable {
 
     var gradient: LinearGradient {
         switch self {
-        case .bluePurple: // Aurora
-            return LinearGradient(colors: [Color.blue, Color.purple], startPoint: .top, endPoint: .bottom)
-        case .greenYellow: // Solar Flare
-            return LinearGradient(colors: [Color.green, Color.yellow], startPoint: .top, endPoint: .bottom)
-        case .redOrange: // Crimson Heat
-            return LinearGradient(colors: [Color.red, Color.orange], startPoint: .top, endPoint: .bottom)
-        case .tealPink: // Neon Sunset
-            return LinearGradient(colors: [Color.teal, Color.pink], startPoint: .top, endPoint: .bottom)
-        case .midnight: // Midnight Blue
-            return LinearGradient(colors: [Color.black, Color.indigo], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .bluePurple:
+            return LinearGradient(
+                colors: [Color(hex: "#667EEA"), Color(hex: "#764BA2")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+        case .greenYellow:
+            return LinearGradient(
+                colors: [Color(hex: "#F2994A"), Color(hex: "#F2C94C")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+        case .redOrange:
+            return LinearGradient(
+                colors: [Color(hex: "#E44D56"), Color(hex: "#F09819")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+        case .tealPink:
+            return LinearGradient(
+                colors: [Color(hex: "#43CEA2"), Color(hex: "#E05FC4")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+        case .midnight:
+            return LinearGradient(
+                colors: [Color(hex: "#0F2027"), Color(hex: "#203A43"), Color(hex: "#2C5364")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
         case .icyMist:
-            return LinearGradient(colors: [Color.cyan, Color.white], startPoint: .top, endPoint: .bottom)
+            return LinearGradient(
+                colors: [Color(hex: "#E0EAFC"), Color(hex: "#CFDEF3")],
+                startPoint: .top, endPoint: .bottom
+            )
         case .forestBloom:
-            return LinearGradient(colors: [Color.green.opacity(0.6), Color.brown], startPoint: .top, endPoint: .bottom)
+            return LinearGradient(
+                colors: [Color(hex: "#11998E"), Color(hex: "#38EF7D")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
         case .velvetDusk:
-            return LinearGradient(colors: [Color.purple, Color.black], startPoint: .top, endPoint: .bottom)
+            return LinearGradient(
+                colors: [Color(hex: "#4A00E0"), Color(hex: "#8E2DE2")],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
         }
     }
 }

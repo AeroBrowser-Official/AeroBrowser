@@ -1,6 +1,6 @@
 //
 //  TitlebarTabViewController.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 10/11/24.
 //

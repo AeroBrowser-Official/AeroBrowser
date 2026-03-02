@@ -1,6 +1,6 @@
 //
 //  HistoryDialogItem.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/18/24.
 //

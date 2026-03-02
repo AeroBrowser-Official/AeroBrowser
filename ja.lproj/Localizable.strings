@@ -1,8 +1,8 @@
 "lang" = "ja";
 
-"Opacity" = "Opacity";
-"About Opacity" = "Opacityについて";
-"Quit Opacity" = "Opacity 終了";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "AeroBrowserについて";
+"Quit AeroBrowser" = "AeroBrowser 終了";
 "File" = "ファイル";
 "New Window" = "新しいウィンドウ";
 "New Tab" = "新しいタブ";

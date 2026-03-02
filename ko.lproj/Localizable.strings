@@ -1,8 +1,8 @@
 "lang" = "ko";
 
-"Opacity" = "Opacity";
-"About Opacity" = "Opacity 정보";
-"Quit Opacity" = "Opacity 종료";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "AeroBrowser 정보";
+"Quit AeroBrowser" = "AeroBrowser 종료";
 "File" = "파일";
 "New Window" = "새로운 윈도우";
 "New Tab" = "새로운 탭";

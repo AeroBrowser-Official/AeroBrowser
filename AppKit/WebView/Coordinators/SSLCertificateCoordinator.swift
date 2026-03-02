@@ -1,6 +1,6 @@
 //
 //  SSLCertificateCoordinator.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //
@@ -29,7 +29,7 @@ class SSLCertificateCoordinator: NSObject, URLSessionDelegate {
     cacheIsValidCertificate = false
     cacheCertificateSummary = ""
     
-    if url.scheme == "opacity" {
+    if url.scheme == "aerobrowser" {
       return
     }
     

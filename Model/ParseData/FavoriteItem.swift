@@ -1,6 +1,6 @@
 //
 //  FavoriteItem.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/3/24.
 //

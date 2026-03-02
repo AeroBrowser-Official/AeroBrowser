@@ -1,6 +1,6 @@
 //
 //  SettingsContent.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 6/3/25.
 //
@@ -20,7 +20,7 @@ struct SettingsContent: View {
   }
   
   var body: some View {
-    ScrollView(.vertical) {
+    ScrollView(.vertical, showsIndicators: false) {
       VStack(alignment: .leading, spacing: 0) {
         switch selectedCategory {
         case .general:
@@ -41,10 +41,9 @@ struct SettingsContent: View {
         
         Spacer(minLength: 40)
       }
-      .padding(.horizontal, 40)
-      .padding(.top, 40)
+      .padding(.horizontal, 36)
+      .padding(.top, 32)
       .frame(maxWidth: .infinity, alignment: .topLeading)
     }
-    .scrollIndicators(.visible)
   }
 }

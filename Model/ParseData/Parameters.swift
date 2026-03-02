@@ -1,6 +1,6 @@
 //
 //  Parameters.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/31/24.
 //

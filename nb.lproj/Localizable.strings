@@ -1,8 +1,8 @@
 "lang" = "no";
 
-"Opacity" = "Opacity";
-"About Opacity" = "Om Opacity";
-"Quit Opacity" = "Avslutt Opacity";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "Om AeroBrowser";
+"Quit AeroBrowser" = "Avslutt AeroBrowser";
 "File" = "Fil";
 "New Window" = "Nytt vindu";
 "New Tab" = "Ny fane";

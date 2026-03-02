@@ -1,6 +1,6 @@
 //
 //  MainWebView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //

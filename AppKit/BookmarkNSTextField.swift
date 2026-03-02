@@ -1,6 +1,6 @@
 //
 //  BookmarkNSTextField.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/11/24.
 //

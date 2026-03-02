@@ -1,6 +1,6 @@
 //
 //  NotificationDialog.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/28/24.
 //

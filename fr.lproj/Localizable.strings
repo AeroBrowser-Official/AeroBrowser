@@ -1,8 +1,8 @@
 "lang" = "fr";
 
-"Opacity" = "Opacity";
-"About Opacity" = "À propos de l'Opacity";
-"Quit Opacity" = "Quitter Opacity";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "À propos d'AeroBrowser";
+"Quit AeroBrowser" = "Quitter AeroBrowser";
 "File" = "Fichier";
 "New Window" = "Nouvelle fenêtre";
 "New Tab" = "Nouvel onglet";

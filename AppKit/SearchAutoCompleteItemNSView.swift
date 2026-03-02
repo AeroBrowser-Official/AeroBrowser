@@ -1,6 +1,6 @@
 //
 //  StopPropagationWrapNSView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/23/24.
 //

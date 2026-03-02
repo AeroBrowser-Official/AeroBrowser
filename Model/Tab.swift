@@ -1,6 +1,6 @@
 //
 //  Tab.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/7/24.
 //
@@ -79,6 +79,7 @@ final class Tab: ObservableObject {
   @Published var isEditSearch: Bool = false
   @Published var autoCompleteList: [SearchHistoryGroup] = []
   @Published var autoCompleteVisitList: [VisitHistoryGroup] = []
+  @Published var searchSuggestions: [String] = []
   @Published var autoCompleteIndex: Int?
   @Published var autoCompleteText: String = ""
   @Published var isChangeByKeyDown: Bool = false
@@ -112,35 +113,35 @@ final class Tab: ObservableObject {
     prefs.allowsContentJavaScript = true
     
     config.defaultWebpagePreferences = prefs
-    config.setURLSchemeHandler(SchemeHandler(), forURLScheme: "opacity")
+    config.setURLSchemeHandler(SchemeHandler(), forURLScheme: "aerobrowser")
     
     let contentController = WKUserContentController()
     let scriptHandler = ScriptHandler(tab: self)
-    contentController.add(scriptHandler, name: "opacityBrowser")
+    contentController.add(scriptHandler, name: "aeroBrowser")
     config.userContentController = contentController
     
     let scriptSource = """
       // notification
       const originalNotification = Notification;
-      class OpacityNotification {
+      class AeroBrowserNotification {
         static requestPermission = () => {
           return new Promise((resolve) => {
             window.resolveNotificationPermission = (permission) => {
               window.resolveNotificationPermission = null;
               resolve(permission);
             };
-            window.webkit.messageHandlers.opacityBrowser.postMessage({ name: "notificationRequest" });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "notificationRequest" });
           });
         };
         constructor(title, options) {
-          window.webkit.messageHandlers.opacityBrowser.postMessage({ name: "showNotification", value: JSON.stringify({ title: title, options: options })});
+          window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "showNotification", value: JSON.stringify({ title: title, options: options })});
           return new originalNotification(title, options);
         }
       };
-      Object.defineProperty(OpacityNotification, 'permission', {
+      Object.defineProperty(AeroBrowserNotification, 'permission', {
         get: () => originalNotification.permission
       });
-      window.Notification = OpacityNotification;
+      window.Notification = AeroBrowserNotification;
     
       // geolocation
       navigator.geolocation.updatePosition = function(lat, lon) {
@@ -170,7 +171,7 @@ final class Tab: ObservableObject {
     preferences.setValue(true, forKey: "developerExtrasEnabled")
     config.preferences = preferences
     
-    let webView = OpacityWebView(frame: .zero, configuration: config)
+    let webView = AeroBrowserWebView(frame: .zero, configuration: config)
     return webView
   }()
   
@@ -185,7 +186,7 @@ final class Tab: ObservableObject {
       // Settings 페이지를 히스토리에 추가
       let settingsHistorySite = HistorySite(
         title: NSLocalizedString("Settings", comment: ""),
-        url: URL(string: "opacity://settings")!,
+        url: URL(string: "aerobrowser://settings")!,
         siteType: .settings
       )
       self.historySiteList.append(settingsHistorySite)
@@ -202,7 +203,7 @@ final class Tab: ObservableObject {
       // New Tab 페이지를 히스토리에 추가
       let newTabHistorySite = HistorySite(
         title: NSLocalizedString("New Tab", comment: ""),
-        url: URL(string: "opacity://new-tab")!,
+        url: URL(string: "aerobrowser://new-tab")!,
         siteType: .newTab
       )
       self.historySiteList.append(newTabHistorySite)
@@ -232,7 +233,7 @@ final class Tab: ObservableObject {
           predicate: #Predicate { $0.domain == host }
         )
         do {
-          if let domainNotification = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+          if let domainNotification = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
             switch domainNotification.permission {
               case DomainPermissionType.notification.rawValue:
                 self.isNotificationPermission = !domainNotification.isDenied
@@ -296,6 +297,7 @@ final class Tab: ObservableObject {
     DispatchQueue.main.async {
       self.autoCompleteList = []
       self.autoCompleteVisitList = []
+      self.searchSuggestions = []
       self.autoCompleteIndex = nil
       self.isChangeByKeyDown = false
     }
@@ -310,7 +312,7 @@ final class Tab: ObservableObject {
     } else {
       let descriptor = FetchDescriptor<GeneralSetting>()
       do {
-        if let browserSettings = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let browserSettings = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           let searchEngine = browserSettings.searchEngine
           let searchEngineData = SEARCH_ENGINE_LIST.first(where: { $0.name == searchEngine })
           if let searchEngineUrlString = searchEngineData?.searchUrlString {
@@ -369,14 +371,14 @@ final class Tab: ObservableObject {
           if self.isInit {
             let newTabSite = HistorySite(
               title: NSLocalizedString("New Tab", comment: ""),
-              url: URL(string: "opacity://new-tab")!,
+              url: URL(string: "aerobrowser://new-tab")!,
               siteType: .newTab
             )
             self.addToHistory(newTabSite)
           } else if self.isSetting {
             let settingsSite = HistorySite(
               title: NSLocalizedString("Settings", comment: ""),
-              url: URL(string: "opacity://settings")!,
+              url: URL(string: "aerobrowser://settings")!,
               siteType: .settings
             )
             self.addToHistory(settingsSite)
@@ -510,7 +512,7 @@ final class Tab: ObservableObject {
         self.isInit = false
         self.isSetting = true
         self.showErrorPage = false
-        self.originURL = URL(string: "opacity://settings")!
+        self.originURL = URL(string: "aerobrowser://settings")!
         self.inputURL = ""
         self.printURL = ""
         self.title = NSLocalizedString("Settings", comment: "")

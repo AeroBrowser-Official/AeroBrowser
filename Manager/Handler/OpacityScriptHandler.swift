@@ -1,6 +1,6 @@
 //
-//  OpacityScriptHandler.swift
-//  Opacity
+//  AeroBrowserScriptHandler.swift
+//  AeroBrowser
 //
 //  Created by Falsy on 4/5/24.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-final class OpacityScriptHandler {
+final class AeroBrowserScriptHandler {
   @ObservedObject var tab: Tab
   
   init(tab: Tab) {
@@ -156,7 +156,7 @@ final class OpacityScriptHandler {
   func deleteAllSearchHistory() -> String {
     SearchManager.deleteAllSearchHistory()
     return """
-      window.opacityResponse.deleteAllSearchHistory({
+      window.aeroBrowserResponse.deleteAllSearchHistory({
         data: "success"
       })
     """
@@ -165,7 +165,7 @@ final class OpacityScriptHandler {
   func deleteAllVisitHistory() -> String {
     VisitManager.deleteAllVisitHistory()
     return """
-      window.opacityResponse.deleteAllVisitHistory({
+      window.aeroBrowserResponse.deleteAllVisitHistory({
         data: "success"
       })
     """
@@ -176,7 +176,7 @@ final class OpacityScriptHandler {
       PermissionManager.deletePermissionById(uuid)
     }
     return """
-      window.opacityResponse.deletePermissions({
+      window.aeroBrowserResponse.deletePermissions({
         data: "success"
       })
     """
@@ -188,7 +188,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.deleteVisitHistory({
+      window.aeroBrowserResponse.deleteVisitHistory({
         data: "success"
       })
     """
@@ -200,7 +200,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.deleteSearchHistory({
+      window.aeroBrowserResponse.deleteSearchHistory({
         data: "success"
       })
     """
@@ -211,7 +211,7 @@ final class OpacityScriptHandler {
       let descriptor = FetchDescriptor<VisitHistory>()
       do {
         let calendar = Calendar.current
-        let visitHistoryList = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+        let visitHistoryList = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
 
         var firstDateString = ""
         if let firstData = visitHistoryList.first {
@@ -235,7 +235,7 @@ final class OpacityScriptHandler {
         }
         let jsonString = try encodeJSON(from: visitHistories)
         return """
-          window.opacityResponse.getVisitHistoryList({
+          window.aeroBrowserResponse.getVisitHistoryList({
             data: {
               firstDate: "\(firstDateString)",
               list: \(jsonString)
@@ -248,7 +248,7 @@ final class OpacityScriptHandler {
     }
       
     return """
-      window.opacityResponse.getVisitHistoryList({
+      window.aeroBrowserResponse.getVisitHistoryList({
         data: "error"
       })
     """
@@ -260,7 +260,7 @@ final class OpacityScriptHandler {
       
       do {
         let calendar = Calendar.current
-        let searchHistoryList = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+        let searchHistoryList = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
         
         var firstDateString = ""
         if let firstData = searchHistoryList.first {
@@ -285,7 +285,7 @@ final class OpacityScriptHandler {
         
         let jsonString = try encodeJSON(from: searchHistories)
         return """
-          window.opacityResponse.getSearchHistoryList({
+          window.aeroBrowserResponse.getSearchHistoryList({
             data: {
               firstDate: "\(firstDateString)",
               list: \(jsonString)
@@ -298,7 +298,7 @@ final class OpacityScriptHandler {
     }
       
     return """
-      window.opacityResponse.getSearchHistoryList({
+      window.aeroBrowserResponse.getSearchHistoryList({
         data: "error"
       })
     """
@@ -307,7 +307,7 @@ final class OpacityScriptHandler {
   func updateTrackerBlocking(_ value: String) -> String? {
     guard let boolValue = Bool(value) else {
       return """
-        window.opacityResponse.updateTrackerBlocking({
+        window.aeroBrowserResponse.updateTrackerBlocking({
           data: "error"
         })
       """
@@ -315,7 +315,7 @@ final class OpacityScriptHandler {
     SettingsManager.setIsTrackerBlocking(boolValue)
     AppDelegate.shared.service.isTrackerBlocking = boolValue
     return """
-    window.opacityResponse.updateTrackerBlocking({
+    window.aeroBrowserResponse.updateTrackerBlocking({
       data: "success"
     })
   """
@@ -326,7 +326,7 @@ final class OpacityScriptHandler {
     SettingsManager.setBlockingTracker(value)
     AppDelegate.shared.service.blockingLevel = value
     return """
-    window.opacityResponse.setBlockingTracker({
+    window.aeroBrowserResponse.setBlockingTracker({
       data: "success"
     })
   """
@@ -336,7 +336,7 @@ final class OpacityScriptHandler {
   func setAdBlocking(_ value: String) -> String? {
     guard let boolValue = Bool(value) else {
       return """
-        window.opacityResponse.setAdBlocking({
+        window.aeroBrowserResponse.setAdBlocking({
           data: "error"
         })
       """
@@ -345,7 +345,7 @@ final class OpacityScriptHandler {
     SettingsManager.setAdBlocking(boolValue)
     AppDelegate.shared.service.isAdBlocking = boolValue
     return """
-      window.opacityResponse.setAdBlocking({
+      window.aeroBrowserResponse.setAdBlocking({
         data: "success"
       })
     """
@@ -354,7 +354,7 @@ final class OpacityScriptHandler {
   func updateRetentionPeriod(_ value: String) -> String? {
     SettingsManager.setRetentionPeriod(value)
     return """
-      window.opacityResponse.updateRetentionPeriod({
+      window.aeroBrowserResponse.updateRetentionPeriod({
         data: "success"
       })
     """
@@ -363,7 +363,7 @@ final class OpacityScriptHandler {
   func updateScreenMode(_ value: String) -> String? {
     SettingsManager.setScreenMode(value)
     return """
-      window.opacityResponse.updateScreenMode({
+      window.aeroBrowserResponse.updateScreenMode({
         data: "success"
       })
     """
@@ -372,7 +372,7 @@ final class OpacityScriptHandler {
   func updateSearchEngine(_ value: String) -> String? {
     SettingsManager.setSearchEngine(value)
     return """
-      window.opacityResponse.updateSearchEngine({
+      window.aeroBrowserResponse.updateSearchEngine({
         data: "success"
       })
     """
@@ -383,14 +383,14 @@ final class OpacityScriptHandler {
     
     if isSuccess {
       return """
-      window.opacityResponse.deleteFavorite({
+      window.aeroBrowserResponse.deleteFavorite({
         data: "success"
       })
     """
     }
     
     return """
-      window.opacityResponse.deleteFavorite({
+      window.aeroBrowserResponse.deleteFavorite({
         data: "error"
       })
     """
@@ -404,7 +404,7 @@ final class OpacityScriptHandler {
       
       if isSuccess {
         return """
-        window.opacityResponse.cratedFavorite({
+        window.aeroBrowserResponse.cratedFavorite({
           data: "success"
         })
       """
@@ -414,7 +414,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.cratedFavorite({
+      window.aeroBrowserResponse.cratedFavorite({
         data: "error"
       })
     """
@@ -428,7 +428,7 @@ final class OpacityScriptHandler {
       print(isSuccess)
       if isSuccess {
         return """
-        window.opacityResponse.updateFavorite({
+        window.aeroBrowserResponse.updateFavorite({
           data: "success"
         })
       """
@@ -438,7 +438,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.updateFavorite({
+      window.aeroBrowserResponse.updateFavorite({
         data: "error"
       })
     """
@@ -449,7 +449,7 @@ final class OpacityScriptHandler {
     UserDefaults.standard.synchronize()
 
     return """
-      window.opacityResponse.updateLanguage({
+      window.aeroBrowserResponse.updateLanguage({
         data: "success"
       })
     """
@@ -465,7 +465,7 @@ final class OpacityScriptHandler {
         
         let jsonString = try encodeJSON(from: jsonDataList)
         return """
-          window.opacityResponse.getFavoriteList({
+          window.aeroBrowserResponse.getFavoriteList({
             data: \(jsonString)
           })
         """
@@ -475,7 +475,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getFavoriteList({
+      window.aeroBrowserResponse.getFavoriteList({
         data: "error"
       })
     """
@@ -490,7 +490,7 @@ final class OpacityScriptHandler {
       do {
         let jsonString = try encodeJSON(from: jsonDataList)
         return """
-          window.opacityResponse.getLocationPermissions({
+          window.aeroBrowserResponse.getLocationPermissions({
             data: \(jsonString)
           })
         """
@@ -500,7 +500,7 @@ final class OpacityScriptHandler {
     }
 
     return """
-      window.opacityResponse.getLocationPermissions({
+      window.aeroBrowserResponse.getLocationPermissions({
         data: "error"
       })
     """
@@ -515,7 +515,7 @@ final class OpacityScriptHandler {
       do {
         let jsonString = try encodeJSON(from: jsonDataList)
         return """
-          window.opacityResponse.getNotificationPermissions({
+          window.aeroBrowserResponse.getNotificationPermissions({
             data: \(jsonString)
           })
         """
@@ -525,7 +525,7 @@ final class OpacityScriptHandler {
     }
 
     return """
-      window.opacityResponse.getNotificationPermissions({
+      window.aeroBrowserResponse.getNotificationPermissions({
         data: "error"
       })
     """
@@ -534,7 +534,7 @@ final class OpacityScriptHandler {
   func getScreenMode() -> String? {
     if let browserSettings = SettingsManager.getGeneralSettings() {
       return """
-        window.opacityResponse.getScreenMode({
+        window.aeroBrowserResponse.getScreenMode({
           data: {
             id: "\(browserSettings.screenMode)",
             name: "\(NSLocalizedString(browserSettings.screenMode, comment: ""))"
@@ -544,7 +544,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getScreenMode({
+      window.aeroBrowserResponse.getScreenMode({
         data: "error"
       })
     """
@@ -558,7 +558,7 @@ final class OpacityScriptHandler {
     do {
       let screenModeString = try encodeJSON(from: screenModeList)
       return """
-        window.opacityResponse.getScreenModeList({
+        window.aeroBrowserResponse.getScreenModeList({
           data: \(screenModeString)
         })
      """
@@ -567,7 +567,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getScreenModeList({
+      window.aeroBrowserResponse.getScreenModeList({
         data: "error"
       })
     """
@@ -576,7 +576,7 @@ final class OpacityScriptHandler {
   func getSearchEngine() -> String? {
     if let browserSettings = SettingsManager.getGeneralSettings() {
       return """
-        window.opacityResponse.getSearchEngine({
+        window.aeroBrowserResponse.getSearchEngine({
           data: {
             id: "\(browserSettings.searchEngine)",
             name: "\(NSLocalizedString(browserSettings.searchEngine, comment: ""))"
@@ -586,7 +586,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getSearchEngine({
+      window.aeroBrowserResponse.getSearchEngine({
         data: "error"
       })
     """
@@ -600,7 +600,7 @@ final class OpacityScriptHandler {
     do {
       let searchString = try encodeJSON(from: searchEngineList)
       return """
-        window.opacityResponse.getSearchEngineList({
+        window.aeroBrowserResponse.getSearchEngineList({
           data: \(searchString)
         })
      """
@@ -609,7 +609,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getSearchEngineList({
+      window.aeroBrowserResponse.getSearchEngineList({
         data: "error"
       })
     """
@@ -618,7 +618,7 @@ final class OpacityScriptHandler {
   func getRetentionPeriod() -> String {
     if let browserSettings = SettingsManager.getGeneralSettings() {
       return """
-        window.opacityResponse.getRetentionPeriod({
+        window.aeroBrowserResponse.getRetentionPeriod({
           data: {
             id: "\(browserSettings.retentionPeriod)",
             name: "\(NSLocalizedString(browserSettings.retentionPeriod, comment: ""))"
@@ -628,7 +628,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getRetentionPeriod({
+      window.aeroBrowserResponse.getRetentionPeriod({
         data: "error"
       })
     """
@@ -643,7 +643,7 @@ final class OpacityScriptHandler {
     do {
       let periodString = try encodeJSON(from: periodList)
       return """
-        window.opacityResponse.getRetentionPeriodList({
+        window.aeroBrowserResponse.getRetentionPeriodList({
           data: \(periodString)
         })
      """
@@ -652,7 +652,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getRetentionPeriodList({
+      window.aeroBrowserResponse.getRetentionPeriodList({
         data: "error"
       })
     """
@@ -661,14 +661,14 @@ final class OpacityScriptHandler {
   func getTrackerBlocking() -> String? {
     if let browserSettings = SettingsManager.getGeneralSettings() {
       return """
-        window.opacityResponse.getTrackerBlocking({
+        window.aeroBrowserResponse.getTrackerBlocking({
           data: \(browserSettings.isTrackerBlocking)
         })
       """
     }
     
     return """
-      window.opacityResponse.getTrackerBlocking({
+      window.aeroBrowserResponse.getTrackerBlocking({
         data: "error"
       })
     """
@@ -679,7 +679,7 @@ final class OpacityScriptHandler {
     tab.updateURLBySearch(url: URL(string: newAddress)!)
     
     return """
-      window.opacityResponse.goPage({
+      window.aeroBrowserResponse.goPage({
         data: "success"
       })
     """
@@ -689,7 +689,7 @@ final class OpacityScriptHandler {
     let lang = Locale.current.language.languageCode?.identifier ?? "en"
     
     return """
-      window.opacityResponse.getLanguage({
+      window.aeroBrowserResponse.getLanguage({
         data: "\(lang)"
       })
     """
@@ -700,7 +700,7 @@ final class OpacityScriptHandler {
     switch pageName {
       case "new-tab":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "Add Favorite": '\(NSLocalizedString("Add Favorite", comment: ""))',
             "Edit Favorite": '\(NSLocalizedString("Edit Favorite", comment: ""))',
@@ -716,7 +716,7 @@ final class OpacityScriptHandler {
       case "settings":
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
           return """
-          window.opacityResponse.getPageStrings({
+          window.aeroBrowserResponse.getPageStrings({
             data: {
               "lang": '\(lang)',
               "Settings": '\(NSLocalizedString("Settings", comment: ""))',
@@ -760,7 +760,7 @@ final class OpacityScriptHandler {
         }
       case "notFindHost":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("Page not found", comment: ""))',
@@ -772,7 +772,7 @@ final class OpacityScriptHandler {
       """
       case "notConnectHost":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("Unable to connect to site", comment: ""))',
@@ -784,7 +784,7 @@ final class OpacityScriptHandler {
       """
       case "notConnectInternet":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("No internet connection", comment: ""))',
@@ -796,7 +796,7 @@ final class OpacityScriptHandler {
       """
       case "occurredSSLError":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("SSL/TLS certificate error", comment: ""))',
@@ -808,7 +808,7 @@ final class OpacityScriptHandler {
       """
       case "blockedContent":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("Blocked content", comment: ""))',
@@ -820,7 +820,7 @@ final class OpacityScriptHandler {
       """
       case "unknown":
         return """
-        window.opacityResponse.getPageStrings({
+        window.aeroBrowserResponse.getPageStrings({
           data: {
             "lang": '\(lang)',
             "headTitle": '\(NSLocalizedString("Unknown error", comment: ""))',
@@ -835,7 +835,7 @@ final class OpacityScriptHandler {
     }
     
     return """
-      window.opacityResponse.getPageStrings({
+      window.aeroBrowserResponse.getPageStrings({
         data: "error"
       })
     """

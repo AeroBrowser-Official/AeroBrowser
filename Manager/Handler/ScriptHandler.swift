@@ -1,6 +1,6 @@
 //
 //  ScriptHandler.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/21/24.
 //
@@ -27,7 +27,7 @@ class ScriptHandler: NSObject, WKScriptMessageHandler {
   }
   
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    if message.name == "opacityBrowser", let messageBody = message.body as? [String: String] {
+    if message.name == "aeroBrowser", let messageBody = message.body as? [String: String] {
       let scriptName = messageBody["name"] ?? ""
       
       switch scriptName {
@@ -69,7 +69,7 @@ class ScriptHandler: NSObject, WKScriptMessageHandler {
           predicate: #Predicate { $0.domain == host && $0.permission == rawType }
         )
         do {
-          if let domainNotification = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+          if let domainNotification = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
             if domainNotification.isDenied == false {
               let scriptValue = value ?? ""
               guard let jsonData = scriptValue.data(using: .utf8) else { return }
@@ -134,7 +134,7 @@ class ScriptHandler: NSObject, WKScriptMessageHandler {
           predicate: #Predicate { $0.domain == host && $0.permission == rawType }
         )
         do {
-          if let notiPer = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+          if let notiPer = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
             if notiPer.isDenied == false {
               DispatchQueue.main.async {
                 webview.evaluateJavaScript("window.resolveNotificationPermission('granted');")

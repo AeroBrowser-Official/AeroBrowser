@@ -1,6 +1,6 @@
 //
 //  GeoLocationCoordinator.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //
@@ -24,10 +24,9 @@ class GeoLocationCoordinator: NSObject, @preconcurrency CLLocationManagerDelegat
   }
   
   func handleLocationUpdates() {
-    // Geo Location 전역 권한
+    // System-level permission request
     if parent.tab.isRequestGeoLocation {
       DispatchQueue.main.async {
-        print("request geo location")
         self.parent.tab.isRequestGeoLocation = false
         self.parent.tab.isLocationDialogIcon = true
         self.parent.tab.isLocationDialog = true
@@ -35,11 +34,11 @@ class GeoLocationCoordinator: NSObject, @preconcurrency CLLocationManagerDelegat
       }
     }
     
-    // Geo Location 업데이트
+    // After host dialog closes → re-fetch location
     if parent.tab.isUpdateLocation {
       DispatchQueue.main.async {
         self.parent.tab.isUpdateLocation = false
-        self.requestLocation()
+        self.deliverLocationOrDeny()
       }
     }
   }
@@ -56,51 +55,147 @@ class GeoLocationCoordinator: NSObject, @preconcurrency CLLocationManagerDelegat
       if let url = webview.url,
          let locationPermission = PermissionManager.getLocationPermissionByURL(url: url),
          !locationPermission.isDenied {
+        // System + host both allowed → inject position fetcher
+        injectGeoPositionBridge(webview: webview, allowed: true)
         locationManager!.startUpdatingLocation()
+      } else if let url = webview.url, PermissionManager.getLocationPermissionByURL(url: url) == nil {
+        // System allowed but no host permission yet → show host dialog when page asks
+        injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: true)
+      } else {
+        // System allowed but host denied
+        injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: true)
       }
     case .denied, .restricted, .notDetermined:
-      deniedGeolocation()
+      injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: false)
     @unknown default:
       break
     }
   }
   
-  private func deniedGeolocation() {
-    print("deniedGeolocation")
-    guard let webview = self.parent.tab.webview else { return }
+  // MARK: - JS Bridge Injection
+  
+  /// Injects a JS bridge that intercepts getCurrentPosition.
+  /// - `allowed`: if true, position will be delivered via native → JS callback
+  /// - `showHostDialog`: if true, prompts the host permission dialog instead of just erroring
+  private func injectGeoPositionBridge(webview: WKWebView, allowed: Bool, showHostDialog: Bool = false) {
+    if allowed {
+      // When allowed, we store the pending callback and wait for native to deliver coords
+      let script = """
+        (function() {
+          window.__aeroPendingGeoCallbacks = [];
+          var origGetCurrentPosition = navigator.geolocation.getCurrentPosition;
+          navigator.geolocation.getCurrentPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "showGeoLocaitonHostPermissionIcon", value: "false" });
+          };
+          navigator.geolocation.watchPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            return 0;
+          };
+        })();
+      """
+      webview.evaluateJavaScript(script, completionHandler: nil)
+    } else if showHostDialog {
+      // System permission granted but no host permission → show host dialog
+      let script = """
+        (function() {
+          window.__aeroPendingGeoCallbacks = [];
+          navigator.geolocation.getCurrentPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "showGeoLocaitonHostPermissionIcon", value: "true" });
+          };
+          navigator.geolocation.watchPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "showGeoLocaitonHostPermissionIcon", value: "true" });
+            return 0;
+          };
+        })();
+      """
+      webview.evaluateJavaScript(script, completionHandler: nil)
+    } else {
+      // No system permission → request it when page asks
+      let script = """
+        (function() {
+          window.__aeroPendingGeoCallbacks = [];
+          navigator.geolocation.getCurrentPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "requestWhenInUseAuthorization" });
+          };
+          navigator.geolocation.watchPosition = function(success, error, options) {
+            window.__aeroPendingGeoCallbacks.push({ success: success, error: error });
+            window.webkit.messageHandlers.aeroBrowser.postMessage({ name: "requestWhenInUseAuthorization" });
+            return 0;
+          };
+        })();
+      """
+      webview.evaluateJavaScript(script, completionHandler: nil)
+    }
+  }
+  
+  /// Deliver real coordinates to all pending JS callbacks
+  private func deliverPosition(webview: WKWebView, latitude: Double, longitude: Double) {
     let script = """
-      navigator.geolocation.getCurrentPosition = function(success, error, options) {
-        window.webkit.messageHandlers.opacityBrowser.postMessage({ name: "requestWhenInUseAuthorization" });
-        error({
-          code: 1,
-          message: 'User Denied Geolocation'
-        });
-      }
+      (function() {
+        var cbs = window.__aeroPendingGeoCallbacks || [];
+        window.__aeroPendingGeoCallbacks = [];
+        var pos = {
+          coords: {
+            latitude: \(latitude),
+            longitude: \(longitude),
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null
+          },
+          timestamp: Date.now()
+        };
+        for (var i = 0; i < cbs.length; i++) {
+          try { cbs[i].success(pos); } catch(e) {}
+        }
+        navigator.geolocation.getCurrentPosition = function(success, error, options) {
+          try { success(pos); } catch(e) {}
+        };
+      })();
     """
     webview.evaluateJavaScript(script, completionHandler: nil)
   }
   
-  private func deniedGeolocationByHost() {
-    print("deniedGeolocationByHost")
-    guard let locationManager = locationManager, let webview = self.parent.tab.webview else { return }
+  /// Deliver error to all pending JS callbacks
+  private func deliverError(webview: WKWebView) {
+    let script = """
+      (function() {
+        var cbs = window.__aeroPendingGeoCallbacks || [];
+        window.__aeroPendingGeoCallbacks = [];
+        var err = { code: 1, message: 'User denied geolocation' };
+        for (var i = 0; i < cbs.length; i++) {
+          try { if (cbs[i].error) cbs[i].error(err); } catch(e) {}
+        }
+      })();
+    """
+    webview.evaluateJavaScript(script, completionHandler: nil)
+  }
+  
+  // MARK: - After host dialog closes
+  
+  /// Called when the host permission dialog closes (Allow or Deny).
+  /// Re-checks the permission and either delivers location or error.
+  @MainActor private func deliverLocationOrDeny() {
+    guard let locationManager = locationManager, let webview = parent.tab.webview, let url = webview.url else { return }
     
     switch locationManager.authorizationStatus {
-      case .authorizedWhenInUse, .authorizedAlways:
-        let script = """
-          navigator.geolocation.getCurrentPosition = function(success, error, options) {
-            window.webkit.messageHandlers.opacityBrowser.postMessage({ name: "showGeoLocaitonHostPermissionIcon", value: "true" });
-            error({
-              code: 1,
-              message: 'User Denied Geolocation'
-            });
-          }
-        """
-        webview.evaluateJavaScript(script, completionHandler: nil)
-        break
-      case .denied, .restricted, .notDetermined:
-        deniedGeolocation()
-        break
-      @unknown default: break
+    case .authorizedWhenInUse, .authorizedAlways:
+      if let permission = PermissionManager.getLocationPermissionByURL(url: url), !permission.isDenied {
+        // Host allowed → start fetching location
+        injectGeoPositionBridge(webview: webview, allowed: true)
+        locationManager.startUpdatingLocation()
+      } else {
+        // Host denied → deliver error to pending callbacks
+        deliverError(webview: webview)
+        injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: true)
+      }
+    default:
+      deliverError(webview: webview)
     }
   }
   
@@ -109,79 +204,66 @@ class GeoLocationCoordinator: NSObject, @preconcurrency CLLocationManagerDelegat
     locationManager.requestWhenInUseAuthorization()
   }
   
+  // MARK: - CLLocationManagerDelegate
+  
   @MainActor func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    print("didChangeAuthorization")
-    DispatchQueue.main.async {
-      self.parent.tab.isLocationDialogIconByHost = false
-    }
-    guard let locationManager = locationManager, let webview = self.parent.tab.webview, let url = webview.url else { return }
+    print("didChangeAuthorization: \(status.rawValue)")
+    guard let webview = parent.tab.webview, let url = webview.url else { return }
     
     switch status {
-      case .authorizedWhenInUse, .authorizedAlways:
-        DispatchQueue.main.async {
-          self.parent.tab.isLocationDialogIcon = false
+    case .authorizedWhenInUse, .authorizedAlways:
+      DispatchQueue.main.async {
+        self.parent.tab.isLocationDialogIcon = false
+        self.parent.tab.isLocationDialogIconByHost = false
+      }
+      // System permission granted. Check host permission.
+      if let permission = PermissionManager.getLocationPermissionByURL(url: url) {
+        if !permission.isDenied {
+          injectGeoPositionBridge(webview: webview, allowed: true)
+          locationManager?.startUpdatingLocation()
+        } else {
+          injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: true)
         }
-        if let locationPermition = PermissionManager.getLocationPermissionByURL(url: url) {
-          if locationPermition.isDenied == false {
-            locationManager.startUpdatingLocation()
-            break
-          }
-        }
-        deniedGeolocationByHost()
-        break
-      case .denied, .restricted:
-        print("denied")
-        deniedGeolocation()
-        break
-      default:
-        break
+      } else {
+        // No host permission record yet → show host dialog when page asks
+        injectGeoPositionBridge(webview: webview, allowed: false, showHostDialog: true)
+      }
+      
+    case .denied, .restricted:
+      DispatchQueue.main.async {
+        self.parent.tab.isLocationDialogIcon = false
+      }
+      deliverError(webview: webview)
+      
+    default:
+      break
     }
   }
   
-  @MainActor func requestLocation() {
-    guard let locationManager = locationManager else { return }
-    print("requestLocation")
-    locationManager.stopUpdatingLocation()
-    locationManager.startUpdatingLocation()
-  }
-
   @MainActor func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print("didUpdateLocations")
-    guard let location = locations.first, let webview = self.parent.tab.webview, let url = webview.url, let locationManager = locationManager else { return }
-    if let locationPermition = PermissionManager.getLocationPermissionByURL(url: url) {
-      if locationPermition.isDenied == false {
-        print("allow geo location")
-        let script = """
-          navigator.geolocation.getCurrentPosition = function(success, error, options) {
-            window.webkit.messageHandlers.opacityBrowser.postMessage({ name: "showGeoLocaitonHostPermissionIcon", value: "false" });
-            success({
-              coords: {
-                latitude: \(location.coordinate.latitude),
-                longitude: \(location.coordinate.longitude)
-              }
-            });
-          };
-          navigator.geolocation.updatePosition(\(location.coordinate.latitude), \(location.coordinate.longitude));
-        """
-
-        webview.evaluateJavaScript(script, completionHandler: nil)
-        locationManager.stopUpdatingLocation()
-        return
-      }
+    guard let location = locations.first, let webview = parent.tab.webview, let url = webview.url else { return }
+    
+    if let permission = PermissionManager.getLocationPermissionByURL(url: url), !permission.isDenied {
+      deliverPosition(webview: webview, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+      locationManager?.stopUpdatingLocation()
+    } else {
+      deliverError(webview: webview)
+      locationManager?.stopUpdatingLocation()
     }
-    deniedGeolocationByHost()
   }
 
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print("didFailWithError")
+    print("didFailWithError: \(error)")
     guard let webview = self.parent.tab.webview else { return }
     let script = """
-      navigator.geolocation.getCurrentPosition = function(success, error, options) {
-        error({
-          code: 1,
-          message: 'Location retrieval failed'
-        });
-      };
+      (function() {
+        var cbs = window.__aeroPendingGeoCallbacks || [];
+        window.__aeroPendingGeoCallbacks = [];
+        var err = { code: 2, message: 'Location retrieval failed: \(error.localizedDescription)' };
+        for (var i = 0; i < cbs.length; i++) {
+          try { if (cbs[i].error) cbs[i].error(err); } catch(e) {}
+        }
+      })();
     """
     webview.evaluateJavaScript(script, completionHandler: nil)
   }

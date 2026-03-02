@@ -1,6 +1,6 @@
 //
 //  GeneralSettingsView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 6/3/25.
 //
@@ -42,10 +42,10 @@ struct GeneralSettingsView: View {
   private let retentionPeriods = ["1 Day", "1 Week", "1 Month", "Indefinite"]
   
   var body: some View {
-    VStack(spacing: 32) {
+    VStack(spacing: 28) {
       HStack(spacing: 0) {
         Text(NSLocalizedString("General", comment: ""))
-          .font(.system(size: 24, weight: .semibold))
+          .font(.system(size: 22, weight: .semibold))
           .foregroundColor(Color("UIText"))
         
         Spacer()

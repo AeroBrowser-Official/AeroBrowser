@@ -1,6 +1,6 @@
 //
 //  Browser.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/10/24.
 //

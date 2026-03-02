@@ -8,15 +8,13 @@ struct NavigationSearchView: View {
 
     var body: some View {
         ZStack {
-            Color.clear // No gradient here, uses MainView's background
+            Color.clear
 
             if let activeTab = browser.tabs.first(where: { $0.id == activeTabId }) {
                 Navigation(service: service, browser: browser, tab: activeTab)
                     .id(activeTab.id)
-                    .frame(height: 44)
-                    .padding(.horizontal, 12)
             }
         }
-        .frame(height: 54)
+        .frame(height: 52)
     }
 }

@@ -1,6 +1,6 @@
 //
 //  SearchAutoCompleteList.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/17/24.
 //
@@ -72,7 +72,7 @@ struct SearchAutoCompleteBox: View {
             self.isSiteDialog.toggle()
           } label: {
             HStack(spacing: 0) {
-              if tab.originURL.scheme == "opacity" || tab.isValidCertificate == true {
+              if tab.originURL.scheme == "aerobrowser" || tab.isValidCertificate == true {
                 Image(systemName: "lock.fill")
                   .frame(maxWidth: 26, maxHeight: 26, alignment: .center)
                   .clipShape(RoundedRectangle(cornerRadius: 14))
@@ -132,27 +132,17 @@ struct SearchAutoCompleteBox: View {
             .padding(.leading, isScrollable ? 0.2 : 0)
             .frame(height: tab.isEditSearch ? 36 : 32)
             .onKeyPress(.upArrow) {
-              if (tab.autoCompleteList.count + tab.autoCompleteVisitList.count) > 0 {
-                let maxSearchCount = tab.autoCompleteList.count > 5 ? 5 : tab.autoCompleteList.count
-                let maxVisitCount = tab.autoCompleteVisitList.count > 5 ? 5 : tab.autoCompleteVisitList.count
-                let maxCount = maxSearchCount + maxVisitCount
+              let total = totalAutoCompleteCount
+              if total > 0 {
                 DispatchQueue.main.async {
                   tab.isChangeByKeyDown = true
-                  if let choiceIndex = tab.autoCompleteIndex {
-                    if choiceIndex > 0 {
-                      tab.autoCompleteIndex = choiceIndex - 1
-                    } else {
-                      tab.autoCompleteIndex = maxCount - 1
-                    }
+                  if let idx = tab.autoCompleteIndex {
+                    tab.autoCompleteIndex = idx > 0 ? idx - 1 : total - 1
                   } else {
-                    tab.autoCompleteIndex = maxCount - 1
+                    tab.autoCompleteIndex = total - 1
                   }
-                  
-                  if let choiceIndex = tab.autoCompleteIndex {
-                    let targetString = choiceIndex + 1 > tab.autoCompleteList.count
-                    ? tab.autoCompleteVisitList[choiceIndex - tab.autoCompleteList.count].url
-                    : tab.autoCompleteList[choiceIndex].searchText
-                    tab.inputURL = targetString
+                  if let idx = tab.autoCompleteIndex {
+                    tab.inputURL = resolveAutoCompleteString(at: idx)
                   }
                 }
                 return .handled
@@ -160,27 +150,17 @@ struct SearchAutoCompleteBox: View {
               return .ignored
             }
             .onKeyPress(.downArrow) {
-              if (tab.autoCompleteList.count + tab.autoCompleteVisitList.count) > 0 {
-                let maxSearchCount = tab.autoCompleteList.count > 5 ? 5 : tab.autoCompleteList.count
-                let maxVisitCount = tab.autoCompleteVisitList.count > 5 ? 5 : tab.autoCompleteVisitList.count
-                let maxCount = maxSearchCount + maxVisitCount
+              let total = totalAutoCompleteCount
+              if total > 0 {
                 DispatchQueue.main.async {
                   tab.isChangeByKeyDown = true
-                  if let choiceIndex = tab.autoCompleteIndex {
-                    if maxCount > choiceIndex + 1 {
-                      tab.autoCompleteIndex = choiceIndex + 1
-                    } else {
-                      tab.autoCompleteIndex = 0
-                    }
+                  if let idx = tab.autoCompleteIndex {
+                    tab.autoCompleteIndex = idx + 1 < total ? idx + 1 : 0
                   } else {
                     tab.autoCompleteIndex = 0
                   }
-                  
-                  if let choiceIndex = tab.autoCompleteIndex {
-                    let targetString = choiceIndex + 1 > tab.autoCompleteList.count
-                    ? tab.autoCompleteVisitList[choiceIndex - tab.autoCompleteList.count].url
-                    : tab.autoCompleteList[choiceIndex].searchText
-                    tab.inputURL = targetString
+                  if let idx = tab.autoCompleteIndex {
+                    tab.inputURL = resolveAutoCompleteString(at: idx)
                   }
                 }
                 return .handled
@@ -188,30 +168,20 @@ struct SearchAutoCompleteBox: View {
               return .ignored
             }
             .onKeyPress(.rightArrow) {
-              if let choiceIndex = tab.autoCompleteIndex, (tab.autoCompleteList.count + tab.autoCompleteVisitList.count) > 0 {
-                let targetString = choiceIndex + 1 > tab.autoCompleteList.count
-                ? tab.autoCompleteVisitList[choiceIndex - tab.autoCompleteList.count].url
-                : tab.autoCompleteList[choiceIndex].searchText
-                
-                if targetString != tab.inputURL {
-                  DispatchQueue.main.async {
-                    tab.inputURL = targetString
-                  }
+              if let idx = tab.autoCompleteIndex, totalAutoCompleteCount > 0 {
+                let target = resolveAutoCompleteString(at: idx)
+                if target != tab.inputURL {
+                  DispatchQueue.main.async { tab.inputURL = target }
                   return .handled
                 }
               }
               return .ignored
             }
             .onKeyPress(.tab) {
-              if let choiceIndex = tab.autoCompleteIndex, (tab.autoCompleteList.count + tab.autoCompleteVisitList.count) > 0 {
-                let targetString = choiceIndex + 1 > tab.autoCompleteList.count
-                ? tab.autoCompleteVisitList[choiceIndex - tab.autoCompleteList.count].url
-                : tab.autoCompleteList[choiceIndex].searchText
-                
-                if targetString != tab.inputURL {
-                  DispatchQueue.main.async {
-                    tab.inputURL = targetString
-                  }
+              if let idx = tab.autoCompleteIndex, totalAutoCompleteCount > 0 {
+                let target = resolveAutoCompleteString(at: idx)
+                if target != tab.inputURL {
+                  DispatchQueue.main.async { tab.inputURL = target }
                   return .handled
                 }
               }
@@ -228,13 +198,40 @@ struct SearchAutoCompleteBox: View {
           .padding(.leading, 5)
           .padding(.trailing, 10)
       }
-      if tab.isEditSearch && tab.inputURL != "" && (tab.autoCompleteList.count + tab.autoCompleteVisitList.count) > 0 {
+      if tab.isEditSearch && tab.inputURL != "" && totalAutoCompleteCount > 0 {
         SearchAutoComplete(browser: browser, tab: tab)
       }
     }
   }
   
+  // MARK: - Helpers
+  
+  private var totalAutoCompleteCount: Int {
+    let s = min(tab.autoCompleteList.count, 5)
+    let v = min(tab.autoCompleteVisitList.count, 5)
+    let g = min(tab.searchSuggestions.count, 5)
+    return s + v + g
+  }
+  
+  private func resolveAutoCompleteString(at index: Int) -> String {
+    let searchCount = min(tab.autoCompleteList.count, 5)
+    let visitCount = min(tab.autoCompleteVisitList.count, 5)
+    
+    if index < searchCount {
+      return tab.autoCompleteList[index].searchText
+    } else if index < searchCount + visitCount {
+      return tab.autoCompleteVisitList[index - searchCount].url
+    } else {
+      let suggestIdx = index - searchCount - visitCount
+      if suggestIdx < tab.searchSuggestions.count {
+        return tab.searchSuggestions[suggestIdx]
+      }
+    }
+    return tab.inputURL
+  }
+  
   func searchBackgroundText(_ choiceIndex: Int) -> String {
+    guard choiceIndex < tab.autoCompleteList.count else { return "" }
     var printText = tab.autoCompleteList[choiceIndex].searchText
     for (index, char) in tab.inputURL.enumerated() {
       guard index < printText.count else { break }

@@ -1,6 +1,6 @@
 //
-//  OpacityWebView.swift
-//  Opacity
+//  AeroBrowserWebView.swift
+//  AeroBrowser
 //
 //  Created by Falsy on 4/17/24.
 //
@@ -12,7 +12,7 @@ enum ContextualMenuAction {
   case downloadImage
 }
 
-class OpacityWebView: WKWebView {
+class AeroBrowserWebView: WKWebView {
   var contextualMenuAction: ContextualMenuAction?
   var openImageNewWindowMenuItem: NSMenuItem?
   

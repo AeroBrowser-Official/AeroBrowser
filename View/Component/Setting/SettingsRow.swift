@@ -1,6 +1,6 @@
 //
 //  SettingsRow.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 6/3/25.
 //
@@ -19,16 +19,12 @@ struct SettingsRow<Content: View>: View {
   var body: some View {
     HStack(spacing: 0) {
       Text(title)
-        .font(.system(size: 14))
-        .foregroundColor(Color("UIText"))
-        .frame(width: 120, alignment: .leading)
-      
-      Spacer()
-        .frame(width: 40)
+        .font(.system(size: 13))
+        .foregroundColor(Color("UIText").opacity(0.8))
+        .frame(width: 130, alignment: .leading)
       
       content()
-        .frame(width: 280, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
-    .frame(maxWidth: .infinity, alignment: .leading)
   }
 }

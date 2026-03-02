@@ -1,6 +1,6 @@
 //
 //  SideBarView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/6/24.
 //
@@ -9,89 +9,76 @@ import SwiftUI
 import SwiftData
 
 struct SideBarView: View {
-  @Query var bookmarks: [Bookmark]
-  @ObservedObject var service: Service
-  @ObservedObject var browser: Browser
-  @State var isCloseHover: Bool = false
-  @State var searchText: String = ""
-  
-  var body: some View {
-    HStack(spacing: 0) {
-      Rectangle()
-        .frame(maxWidth: 0.5, maxHeight: .infinity)
-        .foregroundColor(Color("UIBorder"))
-      ScrollView {
+    @Query var bookmarks: [Bookmark]
+    @ObservedObject var service: Service
+    @ObservedObject var browser: Browser
+    @State var isCloseHover: Bool = false
+    @State var searchText: String = ""
+    
+    var body: some View {
         HStack(spacing: 0) {
-          VStack(spacing: 0) {
+            Rectangle()
+                .frame(width: 0.5)
+                .foregroundColor(Color("UIBorder").opacity(0.5))
+            
             VStack(spacing: 0) {
-              HStack(spacing: 0) {
-                Text(NSLocalizedString("Bookmark", comment: ""))
-                  .font(.system(size: 15))
-                  .foregroundColor(Color("UIText"))
+                // Header
+                HStack {
+                    Text(NSLocalizedString("Bookmark", comment: ""))
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Color("UIText"))
+                    
+                    Spacer()
+                    
+                    Button(action: { browser.isSideBar = false }) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(Color("Icon"))
+                            .frame(width: 22, height: 22)
+                            .background(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(isCloseHover ? Color("UIText").opacity(0.08) : .clear)
+                            )
+                    }
+                    .buttonStyle(.plain)
+                    .onHover { isCloseHover = $0 }
+                }
+                .padding(.horizontal, 14)
+                .padding(.top, 12)
+                .padding(.bottom, 10)
+                
+                BookmarkSearch(searchText: $searchText)
+                    .padding(.horizontal, 14)
+                    .padding(.bottom, 10)
+                
+                Divider().opacity(0.5)
+                
+                if searchText.isEmpty {
+                    BookmarkList(service: service, browser: browser)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.top, 8)
+                        .padding(.leading, 4)
+                        .padding(.trailing, 14)
+                    BookmarkDragAreaNSView(service: service)
+                } else {
+                    BookmarkSearchList(service: service, browser: browser, bookmarks: bookmarks, searchText: $searchText)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 14)
+                }
                 
                 Spacer()
-                
-                VStack(spacing: 0) {
-                  Image(systemName: "xmark")
-                    .foregroundColor(Color("Icon"))
-                    .font(.system(size: 13))
-                    .fontWeight(.regular)
-                }
-                .frame(maxWidth: 25, maxHeight: 25)
-                .background(isCloseHover ? .gray.opacity(0.2) : .gray.opacity(0))
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-                .onHover { hovering in
-                  withAnimation {
-                    isCloseHover = hovering
-                  }
-                }
-                .onTapGesture {
-                  browser.isSideBar = false
-                }
-                .offset(x: 5)
-              }
-              .frame(height: 25)
-              .padding(.vertical, 8)
             }
-            .padding(.horizontal, 15)
-            .padding(.vertical, 5)
-
-            BookmarkSearch(searchText: $searchText)
-              .padding(.horizontal, 15)
-              .padding(.bottom, 15)
-
-            Rectangle()
-              .frame(maxWidth: .infinity, maxHeight: 0.5)
-              .foregroundColor(Color("UIBorder"))
-            
-            if searchText == "" {
-              BookmarkList(service: service, browser: browser)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.top, 10)
-                .padding(.leading, 5)
-                .padding(.trailing, 15)
-              BookmarkDragAreaNSView(service: service)
-            } else {
-              BookmarkSearchList(service: service, browser: browser, bookmarks: bookmarks, searchText: $searchText)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 15)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color("SearchBarBG"))
+            .contextMenu {
+                Button(NSLocalizedString("Add Folder", comment: "")) {
+                    if let baseBookmarkGroup = BookmarkManager.getBaseBookmarkGroup() {
+                        BookmarkManager.addBookmarkGroup(parentGroup: baseBookmarkGroup)
+                    }
+                }
             }
-            
-            Spacer()
-          }
         }
-      }
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-      .background(Color("SearchBarBG"))
-      .contextMenu {
-        Button(NSLocalizedString("Add Folder", comment: "")) {
-          if let baseBookmarkGroup = BookmarkManager.getBaseBookmarkGroup() {
-            BookmarkManager.addBookmarkGroup(parentGroup: baseBookmarkGroup)
-          }
-        }
-      }
+        .frame(maxWidth: 260, maxHeight: .infinity)
     }
-    .frame(maxWidth: 280, maxHeight: .infinity)
-  }
 }

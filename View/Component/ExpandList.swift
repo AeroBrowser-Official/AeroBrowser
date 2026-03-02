@@ -1,6 +1,6 @@
 //
 //  DisclosureGroupView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/9/24.
 //

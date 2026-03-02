@@ -1,6 +1,6 @@
 //
 //  TestNSTextField.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/14/24.
 //

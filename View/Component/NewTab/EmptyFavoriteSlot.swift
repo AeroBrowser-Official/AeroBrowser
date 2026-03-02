@@ -1,6 +1,6 @@
 //
 //  EmptyFavoriteSlot.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 6/1/25.
 //

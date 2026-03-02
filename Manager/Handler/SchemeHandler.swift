@@ -1,6 +1,6 @@
 //
 //  SchemeHandler.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/24/24.
 //

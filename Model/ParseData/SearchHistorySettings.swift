@@ -1,6 +1,6 @@
 //
 //  searchHistorySettings.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/28/24.
 //

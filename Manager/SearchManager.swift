@@ -1,6 +1,6 @@
 //
 //  SearchManager.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/15/24.
 //
@@ -20,7 +20,7 @@ class SearchManager {
     descriptor.fetchLimit = 5
     
     do {
-      let searchHistoryGroupList = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      let searchHistoryGroupList = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
       return searchHistoryGroupList
     } catch {
       print("ModelContainerError findSearchHistoryGroup")
@@ -35,7 +35,7 @@ class SearchManager {
       predicate: #Predicate { $0.searchText == keyword }
     )
     do {
-      if let searchHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let searchHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         return searchHistoryGroup
       }
     } catch {
@@ -52,8 +52,8 @@ class SearchManager {
     } else {
       do {
         let newSearchHistoryGroup = SearchHistoryGroup(searchText: uppLowLetters)
-        AppDelegate.shared.opacityModelContainer.mainContext.insert(newSearchHistoryGroup)
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        AppDelegate.shared.modelContainer.mainContext.insert(newSearchHistoryGroup)
+        try AppDelegate.shared.modelContainer.mainContext.save()
         self.addSearchHistory(uppLowLetters)
       } catch {
         print("ModelContainerError addSearchHistory")
@@ -65,15 +65,15 @@ class SearchManager {
     let descriptor = FetchDescriptor<SearchHistory>()
     let descriptorGroup = FetchDescriptor<SearchHistoryGroup>()
     do {
-      let allSearchHistory = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
-      let allSearchHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptorGroup)
+      let allSearchHistory = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
+      let allSearchHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptorGroup)
       for searchHistory in allSearchHistory {
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(searchHistory)
+        AppDelegate.shared.modelContainer.mainContext.delete(searchHistory)
       }
       for shGroup in allSearchHistoryGroup {
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(shGroup)
+        AppDelegate.shared.modelContainer.mainContext.delete(shGroup)
       }
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      try AppDelegate.shared.modelContainer.mainContext.save()
     } catch {
        print("ModelContainerError deleteAllSearchHistory")
      }
@@ -81,11 +81,11 @@ class SearchManager {
   
   @MainActor static func deleteSearchHistoryGroup(_ target: SearchHistoryGroup) {
     for searchHistory in target.searchHistories {
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(searchHistory)
+      AppDelegate.shared.modelContainer.mainContext.delete(searchHistory)
     }
     do {
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      AppDelegate.shared.modelContainer.mainContext.delete(target)
+      try AppDelegate.shared.modelContainer.mainContext.save()
     } catch {
       print("ModelContainerError deleteSearchHistoryGroup")
     }
@@ -96,10 +96,10 @@ class SearchManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         let cacheGroupId = target.searchHistoryGroup?.id
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        AppDelegate.shared.modelContainer.mainContext.delete(target)
+        try AppDelegate.shared.modelContainer.mainContext.save()
         if let groupId = cacheGroupId {
           self.deleteSearchHistoryGroupById(groupId)
         }
@@ -114,7 +114,7 @@ class SearchManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let emptySearchHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let emptySearchHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         if emptySearchHistoryGroup.searchHistories.isEmpty {
           self.deleteSearchHistoryGroup(emptySearchHistoryGroup)
         }

@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/25/24.
 //

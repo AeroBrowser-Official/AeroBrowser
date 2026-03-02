@@ -1,6 +1,6 @@
 //
 //  BookmarkDragArea.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/13/24.
 //

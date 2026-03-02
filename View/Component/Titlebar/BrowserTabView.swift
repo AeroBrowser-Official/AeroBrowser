@@ -1,6 +1,6 @@
 //
 //  BrowserTabView.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/11/24.
 //

@@ -2,9 +2,9 @@
 "lang" = "en";
 
 // Menu
-"Opacity" = "AeroBrowser";
-"About Opacity" = "About AeroBrowser";
-"Quit Opacity" = "Quit AeroBrowser";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "About AeroBrowser";
+"Quit AeroBrowser" = "Quit AeroBrowser";
 "File" = "File";
 "New Window" = "New Window";
 "New Tab" = "New Tab";

@@ -1,6 +1,6 @@
 //
 //  JavaScriptCoordinator.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //
@@ -91,7 +91,7 @@ class JavaScriptCoordinator: NSObject, WKUIDelegate {
     print("createWebViewWith")
     
     // 이미지 다운로드 처리
-    if let customAction = (webView as? OpacityWebView)?.contextualMenuAction,
+    if let customAction = (webView as? AeroBrowserWebView)?.contextualMenuAction,
        let requestURL = navigationAction.request.url {
       if customAction == .downloadImage {
         downloadImage(from: requestURL)

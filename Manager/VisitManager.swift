@@ -1,6 +1,6 @@
 //
 //  VisitManager.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/25/24.
 //
@@ -25,7 +25,7 @@ class VisitManager {
     descriptor.fetchLimit = 5
     
     do {
-      let visitHistoryGroupList = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      let visitHistoryGroupList = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
       return visitHistoryGroupList
     } catch {
       print("ModelContainerError findVisitHistoryGroup")
@@ -40,7 +40,7 @@ class VisitManager {
       predicate: #Predicate { $0.url == url }
     )
     do {
-      if let visitHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let visitHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         return visitHistoryGroup
       }
     } catch {
@@ -57,7 +57,7 @@ class VisitManager {
     descriptor.fetchLimit = 1
     
     do {
-      let recentGroups = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      let recentGroups = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
       return recentGroups.first
     } catch {
       print("Error fetching recent visit history group: \(error)")
@@ -128,7 +128,7 @@ class VisitManager {
       if visitGroup.faviconData == nil, let faviconData = faviconData {
         visitGroup.faviconData = faviconData
         do {
-          try AppDelegate.shared.opacityModelContainer.mainContext.save()
+          try AppDelegate.shared.modelContainer.mainContext.save()
         } catch {
           print("ModelContainerError updating favicon")
         }
@@ -136,8 +136,8 @@ class VisitManager {
     } else {
       do {
         let newVisitHistoryGroup = VisitHistoryGroup(url: url, title: title, faviconData: faviconData)
-        AppDelegate.shared.opacityModelContainer.mainContext.insert(newVisitHistoryGroup)
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        AppDelegate.shared.modelContainer.mainContext.insert(newVisitHistoryGroup)
+        try AppDelegate.shared.modelContainer.mainContext.save()
         self.addVisitHistory(url: url)
       } catch {
         print("ModelContainerError addVisitHistory")
@@ -149,7 +149,7 @@ class VisitManager {
     if let visitGroup = self.getVisitHistoryGroup(url) {
       visitGroup.faviconData = faviconData
       do {
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        try AppDelegate.shared.modelContainer.mainContext.save()
       } catch {
         print("ModelContainerError updateVisitHistoryGroupFavicon")
       }
@@ -160,15 +160,15 @@ class VisitManager {
     let descriptor = FetchDescriptor<VisitHistory>()
     let descriptorGroup = FetchDescriptor<VisitHistoryGroup>()
     do {
-      let allVisitHistory = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
-      let allVisitHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptorGroup)
+      let allVisitHistory = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
+      let allVisitHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptorGroup)
       for visitHistory in allVisitHistory {
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(visitHistory)
+        AppDelegate.shared.modelContainer.mainContext.delete(visitHistory)
       }
       for vhGroup in allVisitHistoryGroup {
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(vhGroup)
+        AppDelegate.shared.modelContainer.mainContext.delete(vhGroup)
       }
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      try AppDelegate.shared.modelContainer.mainContext.save()
     } catch {
        print("ModelContainerError deleteAllVisitHistory")
      }
@@ -176,11 +176,11 @@ class VisitManager {
   
   @MainActor static func deleteVisitHistoryGroup(_ target: VisitHistoryGroup) {
     for visitHistory in target.visitHistories {
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(visitHistory)
+      AppDelegate.shared.modelContainer.mainContext.delete(visitHistory)
     }
     do {
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      AppDelegate.shared.modelContainer.mainContext.delete(target)
+      try AppDelegate.shared.modelContainer.mainContext.save()
     } catch {
       print("ModelContainerError deleteVisitHistoryGroup")
      }
@@ -191,10 +191,10 @@ class VisitManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         let cacheGroupId = target.visitHistoryGroup?.id
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+        AppDelegate.shared.modelContainer.mainContext.delete(target)
+        try AppDelegate.shared.modelContainer.mainContext.save()
         if let groupId = cacheGroupId {
           self.deleteVisitHistoryGroupById(groupId)
         }
@@ -209,7 +209,7 @@ class VisitManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let emptySearchHistoryGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let emptySearchHistoryGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         if emptySearchHistoryGroup.visitHistories.isEmpty {
           self.deleteVisitHistoryGroup(emptySearchHistoryGroup)
         }

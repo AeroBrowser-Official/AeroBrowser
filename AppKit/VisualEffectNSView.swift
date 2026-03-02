@@ -1,6 +1,6 @@
 //
 //  VisualEffect.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/18/24.
 //

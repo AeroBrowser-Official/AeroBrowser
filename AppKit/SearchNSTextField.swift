@@ -1,6 +1,6 @@
 //
 //  SearchTextField.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/19/24.
 //
@@ -57,6 +57,11 @@ struct SearchNSTextField: NSViewRepresentable {
         
         if let autoCompleteVisitList = VisitManager.findVisitHistoryGroup(lowercaseKeyword) {
           self.parent.tab.autoCompleteVisitList = autoCompleteVisitList
+        }
+        
+        // Fetch Google search suggestions
+        SearchSuggestionService.shared.fetchSuggestions(for: textField.stringValue) { suggestions in
+          self.parent.tab.searchSuggestions = suggestions
         }
         
         if self.allowedCharacters(string: lowercaseKeyword)

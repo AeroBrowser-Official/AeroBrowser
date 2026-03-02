@@ -1,6 +1,6 @@
 //
 //  PermissionManager.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/31/24.
 //
@@ -17,7 +17,7 @@ class PermissionManager {
         predicate: #Predicate { $0.permission == rawType && $0.domain == host }
       )
       do {
-        if let locaitonPermission = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+        if let locaitonPermission = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
           return locaitonPermission
         }
       } catch {
@@ -33,7 +33,7 @@ class PermissionManager {
       predicate: #Predicate { $0.permission == rawType }
     )
     do {
-      let notificationPermissions = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      let notificationPermissions = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
       return notificationPermissions
     } catch {
       print("getLocationPermissions error")
@@ -47,7 +47,7 @@ class PermissionManager {
       predicate: #Predicate { $0.permission == rawType }
     )
     do {
-      let notificationPermissions = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor)
+      let notificationPermissions = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor)
       return notificationPermissions
     } catch {
       print("getNotificationPermissions error")
@@ -60,9 +60,9 @@ class PermissionManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
-        AppDelegate.shared.opacityModelContainer.mainContext.delete(target)
-        try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
+        AppDelegate.shared.modelContainer.mainContext.delete(target)
+        try AppDelegate.shared.modelContainer.mainContext.save()
       }
     } catch {
       print("delete permission by id error")
@@ -74,7 +74,7 @@ class PermissionManager {
       predicate: #Predicate { $0.id == id }
     )
     do {
-      if let target = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(descriptor).first {
+      if let target = try AppDelegate.shared.modelContainer.mainContext.fetch(descriptor).first {
         target.isDenied = isDenied
       }
     } catch {

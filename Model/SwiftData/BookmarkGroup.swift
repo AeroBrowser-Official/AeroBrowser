@@ -1,6 +1,6 @@
 //
 //  BookmarkGroup.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 4/9/24.
 //

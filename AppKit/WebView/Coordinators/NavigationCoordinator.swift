@@ -1,6 +1,6 @@
 //
 //  NavigationCoordinator.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 5/24/25.
 //
@@ -12,6 +12,7 @@ class NavigationCoordinator: NSObject, WKNavigationDelegate {
   var parent: MainWebView!
   var sslCertificateCoordinator: SSLCertificateCoordinator!
   var geoLocationCoordinator: GeoLocationCoordinator!
+  var downloadCoordinator: DownloadCoordinator!
   
   var cacheErrorURL: URL?
   var reloadAttemptCount = 0
@@ -82,7 +83,7 @@ class NavigationCoordinator: NSObject, WKNavigationDelegate {
       
       var addAgentText = ""
       if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        addAgentText = " Opacity/" + version
+        addAgentText = " AeroBrowser/" + version
       }
       
       if let range = userAgent.range(of: "AppleWebKit/") {
@@ -231,6 +232,38 @@ class NavigationCoordinator: NSObject, WKNavigationDelegate {
     decisionHandler(.allow)
   }
   
+  func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+    if let mimeType = navigationResponse.response.mimeType {
+      let downloadMIMEs = [
+        "application/zip", "application/x-zip-compressed",
+        "application/gzip", "application/x-gzip",
+        "application/x-tar", "application/x-7z-compressed",
+        "application/x-rar-compressed",
+        "application/octet-stream",
+        "application/x-dmg", "application/x-apple-diskimage",
+        "application/x-msdownload", "application/x-msi",
+        "application/vnd.debian.binary-package",
+        "application/x-bzip2",
+        "application/pdf",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        "application/msword", "application/vnd.ms-excel", "application/vnd.ms-powerpoint"
+      ]
+      if downloadMIMEs.contains(mimeType) && !navigationResponse.canShowMIMEType {
+        decisionHandler(.download)
+        return
+      }
+    }
+    
+    if !navigationResponse.canShowMIMEType {
+      decisionHandler(.download)
+      return
+    }
+    
+    decisionHandler(.allow)
+  }
+  
   func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
     print("didReceiveServerRedirectForProvisionalNavigation")
     guard let webviewURL = webView.url, webviewURL != parent.tab.originURL else { return }
@@ -349,7 +382,7 @@ class NavigationCoordinator: NSObject, WKNavigationDelegate {
   private func setupHashChangeListener(webView: WKWebView) {
     webView.evaluateJavaScript("""
       window.addEventListener('hashchange', function() {
-        window.webkit.messageHandlers.opacityBrowser.postMessage({
+        window.webkit.messageHandlers.aeroBrowser.postMessage({
           name: "hashChange",
           value: window.location.href
         });
@@ -713,5 +746,14 @@ class NavigationCoordinator: NSObject, WKNavigationDelegate {
     case .unknown:
       return NSLocalizedString("Unknown error", comment: "")
     }
+  }
+  
+  // MARK: - Download delegate forwarding
+  func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
+    download.delegate = downloadCoordinator
+  }
+  
+  func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
+    download.delegate = downloadCoordinator
   }
 }

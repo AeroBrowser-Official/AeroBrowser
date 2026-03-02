@@ -1,6 +1,6 @@
 //
 //  BookmarkAPI.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/12/24.
 //
@@ -21,7 +21,7 @@ class BookmarkManager {
       predicate: #Predicate { $0.isBase == true }
     )
     do {
-      if let baseBookmarkGroup = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(baseBookmarkGroupDescriptor).first {
+      if let baseBookmarkGroup = try AppDelegate.shared.modelContainer.mainContext.fetch(baseBookmarkGroupDescriptor).first {
         cacheBaseBookmarkGroup = baseBookmarkGroup
         return baseBookmarkGroup
       }
@@ -86,8 +86,8 @@ class BookmarkManager {
   @MainActor static func deleteBookmark(bookmark: Bookmark) {
     do {
       let cacheBookmarkGroup = bookmark.bookmarkGroup!
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(bookmark)
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      AppDelegate.shared.modelContainer.mainContext.delete(bookmark)
+      try AppDelegate.shared.modelContainer.mainContext.save()
       self.resetIndexByBookmark(parentGroup: cacheBookmarkGroup)
     } catch {
       print("ModelContainerError deleteBookmarkGroup")
@@ -101,7 +101,7 @@ class BookmarkManager {
     for childChildBookmarkGroup in childBookmarkGroup.bookmarkGroups {
       self.deleteChildBookmarkGroup(childBookmarkGroup: childChildBookmarkGroup)
     }
-    AppDelegate.shared.opacityModelContainer.mainContext.delete(childBookmarkGroup)
+    AppDelegate.shared.modelContainer.mainContext.delete(childBookmarkGroup)
   }
   
   @MainActor static func deleteBookmarkGroup(bookmarkGroup: BookmarkGroup) {
@@ -113,8 +113,8 @@ class BookmarkManager {
     }
     do {
       let cacheBookmarkGroup = bookmarkGroup.parent!
-      AppDelegate.shared.opacityModelContainer.mainContext.delete(bookmarkGroup)
-      try AppDelegate.shared.opacityModelContainer.mainContext.save()
+      AppDelegate.shared.modelContainer.mainContext.delete(bookmarkGroup)
+      try AppDelegate.shared.modelContainer.mainContext.save()
       self.resetIndexByBookmarkGroup(parentGroup: cacheBookmarkGroup)
     } catch {
       print("ModelContainerError deleteBookmarkGroup")

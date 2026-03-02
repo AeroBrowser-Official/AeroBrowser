@@ -1,13 +1,13 @@
 //
-//  OpacityWindowDelegate.swift
-//  Opacity
+//  AeroBrowserWindowDelegate.swift
+//  AeroBrowser
 //
 //  Created by Falsy on 10/11/24.
 //
 
 import SwiftUI
 
-class OpacityWindowDelegate: NSObject, NSWindowDelegate, ObservableObject {
+class AeroBrowserWindowDelegate: NSObject, NSWindowDelegate, ObservableObject {
   var windowMap: [UUID:NSWindow] = [:]
   @Published var isFullScreen: Bool = false
   var lastActivationTime: Date?

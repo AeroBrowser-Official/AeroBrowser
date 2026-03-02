@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 1/16/24.
 //
@@ -16,12 +16,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
   static var shared: AppDelegate!
     var updaterController: SPUStandardUpdaterController!
   
-  var prevWindow: NSWindow?
+  weak var prevWindow: NSWindow?
   var windowMap: [UUID:NSWindow] = [:]
     private let whatsNewShownKey = "lastWhatsNewVersion"
 
   var service: Service = Service()
-  let windowDelegate = OpacityWindowDelegate()
+  let windowDelegate = AeroBrowserWindowDelegate()
   
   var sidebarToggleMenuItem: NSMenuItem!
   var reloadMenuItem: NSMenuItem!
@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
   }
 
   @MainActor
-  let opacityModelContainer: ModelContainer = {
+  let modelContainer: ModelContainer = {
     let schema = Schema([GeneralSetting.self, DomainPermission.self, BookmarkGroup.self,  SearchHistoryGroup.self, VisitHistoryGroup.self, Favorite.self])
     let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
     do {
@@ -111,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
       .environmentObject(self.service.browsers[newWindowNo]!)
       .background(VisualEffectNSView())
       .frame(minWidth: 500, maxWidth: .infinity, minHeight: 350, maxHeight: .infinity)
-      .modelContainer(opacityModelContainer)
+      .modelContainer(modelContainer)
       
     
     newWindow.contentView = NSHostingController(rootView: contentView).view
@@ -400,13 +400,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
   @MainActor func deleteExpiredData() {
     do {
       let generalSettingDescriptor = FetchDescriptor<GeneralSetting>()
-      if let generalSetting = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(generalSettingDescriptor).first {
+      if let generalSetting = try AppDelegate.shared.modelContainer.mainContext.fetch(generalSettingDescriptor).first {
         if generalSetting.retentionPeriod != DataRententionPeriodList.indefinite.rawValue {
           let calendar = Calendar.current
           let today = Date()
           
           let searchHistory = FetchDescriptor<SearchHistory>()
-          let searchHistories = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(searchHistory)
+          let searchHistories = try AppDelegate.shared.modelContainer.mainContext.fetch(searchHistory)
                     
           for searchData in searchHistories {
             let components = calendar.dateComponents([.day], from: searchData.createDate, to: today)
@@ -414,22 +414,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
               if (generalSetting.retentionPeriod == DataRententionPeriodList.oneDay.rawValue && days >= 1)
                   || (generalSetting.retentionPeriod == DataRententionPeriodList.oneWeek.rawValue && days >= 7)
                   || (generalSetting.retentionPeriod == DataRententionPeriodList.oneMonth.rawValue && days >= 30) {
-                AppDelegate.shared.opacityModelContainer.mainContext.delete(searchData)
+                AppDelegate.shared.modelContainer.mainContext.delete(searchData)
               }
             }
           }
           
           let searchHistoryGroupDescriptor = FetchDescriptor<SearchHistoryGroup>()
-          let searchHistoryGroups = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(searchHistoryGroupDescriptor)
+          let searchHistoryGroups = try AppDelegate.shared.modelContainer.mainContext.fetch(searchHistoryGroupDescriptor)
           
           for group in searchHistoryGroups {
             if group.searchHistories.isEmpty {
-              AppDelegate.shared.opacityModelContainer.mainContext.delete(group)
+              AppDelegate.shared.modelContainer.mainContext.delete(group)
             }
           }
 
           let visitHistory = FetchDescriptor<VisitHistory>()
-          let visitHIstories = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(visitHistory)
+          let visitHIstories = try AppDelegate.shared.modelContainer.mainContext.fetch(visitHistory)
           
           for visitData in visitHIstories {
             let components = calendar.dateComponents([.day], from: visitData.createDate, to: today)
@@ -437,21 +437,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
               if (generalSetting.retentionPeriod == DataRententionPeriodList.oneDay.rawValue && days >= 1)
                   || (generalSetting.retentionPeriod == DataRententionPeriodList.oneWeek.rawValue && days >= 7)
                   || (generalSetting.retentionPeriod == DataRententionPeriodList.oneMonth.rawValue && days >= 30) {
-                AppDelegate.shared.opacityModelContainer.mainContext.delete(visitData)
+                AppDelegate.shared.modelContainer.mainContext.delete(visitData)
               }
             }
           }
           
           let visitHistoryGroupDescriptor = FetchDescriptor<VisitHistoryGroup>()
-          let visitHistoryGroups = try AppDelegate.shared.opacityModelContainer.mainContext.fetch(visitHistoryGroupDescriptor)
+          let visitHistoryGroups = try AppDelegate.shared.modelContainer.mainContext.fetch(visitHistoryGroupDescriptor)
           
           for group in visitHistoryGroups {
             if group.visitHistories.isEmpty {
-              AppDelegate.shared.opacityModelContainer.mainContext.delete(group)
+              AppDelegate.shared.modelContainer.mainContext.delete(group)
             }
           }
           
-          try AppDelegate.shared.opacityModelContainer.mainContext.save()
+          try AppDelegate.shared.modelContainer.mainContext.save()
         }
       }
     } catch {

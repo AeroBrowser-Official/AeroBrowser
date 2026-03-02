@@ -1,6 +1,6 @@
 //
 //  DialogButtonCancelStyle.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 2/29/24.
 //

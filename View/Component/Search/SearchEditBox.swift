@@ -1,6 +1,6 @@
 //
 //  SearchEditBox.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 3/17/24.
 //

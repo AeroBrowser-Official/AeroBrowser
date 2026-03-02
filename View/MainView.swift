@@ -7,28 +7,38 @@ struct MainView: View {
     @AppStorage("selectedTheme") private var selectedTheme: String = Theme.bluePurple.rawValue
     @AppStorage("customThemes") private var customThemesData: Data = Data()
 
-    // Determine the current theme's gradient (built-in or custom)
-    private var currentGradient: LinearGradient {
-        // Built-in match
-        if let theme = Theme.allCases.first(where: { $0.rawValue == selectedTheme }) {
-            return theme.gradient
-        }
-
-        // Custom UUID match
-        if let uuid = UUID(uuidString: selectedTheme),
-           let customThemes = try? JSONDecoder().decode([CustomTheme].self, from: customThemesData),
-           let matched = customThemes.first(where: { $0.id == uuid }) {
-            return matched.gradient
-        }
-
-        return Theme.bluePurple.gradient
+    private var effects: ThemeEffects {
+        ThemeEffects.resolve(selectedTheme: selectedTheme, customThemesData: customThemesData)
     }
 
     var body: some View {
         ZStack {
-            currentGradient
+            // Layer 1: Vibrancy / frosted glass (shows desktop when chromeOpacity < 1)
+            if effects.blurRadius > 0 {
+                VisualEffectNSView()
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            // Layer 2: Gradient with adjustable opacity
+            effects.gradient
+                .opacity(effects.chromeOpacity)
                 .edgesIgnoringSafeArea(.all)
+            
+            // Layer 3: Frosted blur on top of gradient
+            if effects.blurRadius > 0 {
+                Color.white.opacity(0.001) // invisible layer to apply blur
+                    .background(.ultraThinMaterial)
+                    .opacity(min(effects.blurRadius / 30.0, 0.6))
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
+            // Layer 4: Noise texture
+            if effects.noiseOpacity > 0.001 {
+                NoiseTexture(opacity: effects.noiseOpacity)
+                    .edgesIgnoringSafeArea(.all)
+            }
 
+            // Layer 5: Browser content
             HStack(spacing: 0) {
                 GeometryReader { geometry in
                     VStack(spacing: 0) {
@@ -46,7 +56,7 @@ struct MainView: View {
                                 browser: browser,
                                 tab: tab,
                                 isActive: true,
-                                geometryHeight: geometry.size.height - 54
+                                geometryHeight: geometry.size.height - 52
                             )
                         }
                     }

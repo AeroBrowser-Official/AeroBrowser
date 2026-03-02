@@ -1,6 +1,6 @@
 //
 //  BookmarkFolderDropdown.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 6/3/25.
 //

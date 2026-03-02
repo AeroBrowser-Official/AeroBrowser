@@ -1,6 +1,6 @@
 //
 //  Commands.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 10/9/24.
 //
@@ -17,14 +17,14 @@ struct MainCommands: Commands {
 
   var body: some Commands {
     CommandGroup(replacing: .appTermination) {
-      Button(NSLocalizedString("Quit Opacity", comment: "")) {
+      Button(NSLocalizedString("Quit AeroBrowser", comment: "")) {
         AppDelegate.shared.exitApplication()
       }
       .keyboardShortcut("q", modifiers: .command)
     }
     
     CommandGroup(replacing: .appInfo) {
-      Button(NSLocalizedString("About Opacity", comment: "")) {
+      Button(NSLocalizedString("About AeroBrowser", comment: "")) {
         AppDelegate.shared.openAboutWindow()
       }
     }

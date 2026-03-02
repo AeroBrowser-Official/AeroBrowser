@@ -1,8 +1,8 @@
 "lang" = "zh";
 
-"Opacity" = "Opacity";
-"About Opacity" = "关于 Opacity";
-"Quit Opacity" = "退出 Opacity";
+"AeroBrowser" = "AeroBrowser";
+"About AeroBrowser" = "关于 AeroBrowser";
+"Quit AeroBrowser" = "退出 AeroBrowser";
 "File" = "文件";
 "New Window" = "新建窗口";
 "New Tab" = "新建标签页";

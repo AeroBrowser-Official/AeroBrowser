@@ -4,7 +4,7 @@ import SwiftData
 struct ContentView: View {
   @Query var generalSettings: [GeneralSetting]
   
-  @EnvironmentObject var windowDelegate: OpacityWindowDelegate
+  @EnvironmentObject var windowDelegate: AeroBrowserWindowDelegate
   @EnvironmentObject var service: Service
   @EnvironmentObject var browser: Browser
   

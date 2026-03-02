@@ -1,6 +1,6 @@
 //
 //  LocationPermissionIcon.swift
-//  Opacity
+//  AeroBrowser
 //
 //  Created by Falsy on 8/11/24.
 //
