@@ -65,14 +65,6 @@ Planned features and improvements for upcoming releases:
 
 ---
 
-## 🙏 Credits & Attribution
-
-Parts of this project were inspired by and based on work from the [Opacity browser](https://github.com/Falsy/Opacity) by [Falsy](https://github.com/Falsy).
-
-We are grateful for their open-source contribution, which helped shape certain foundational aspects of AeroBrowser.
-
----
-
 ## 💬 Support & Feedback
 
 Have a bug report, feature request, or general question? Please open an issue on the [GitHub Issues page](https://github.com/AeroBrowser-Official/AeroBrowser/issues).
