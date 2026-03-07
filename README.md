@@ -8,8 +8,7 @@
 </p>
 
 <p align="center">
-<img src="https://img.shields.io/github/v/release/AeroBrowser-Official/AeroBrowser?style=flat-square&label=latest&color=blueviolet" />
-  <img src="https://img.shields.io/github/license/AeroBrowser-Official/AeroBrowser?style=flat-square" />
+  <img src="https://img.shields.io/github/v/release/AeroBrowser-Official/AeroBrowser?style=flat-square&label=latest&color=blueviolet" />
   <img src="https://img.shields.io/badge/macOS-14+-lightgrey?style=flat-square" />
 </p>
 
@@ -41,7 +40,7 @@
 
 AeroBrowser is distributed as a `.pkg` installer.
 
-### ➡️ [Download AeroBrowser.pkg](https://github.com/aerobrowser/aerobrowser/releases/latest)
+### ➡️ [Download AeroBrowser.pkg](https://github.com/AeroBrowser-Official/AeroBrowser/releases/latest)
 
 - This is the recommended method for **new users** or **manual installation**.
 - Simply open the `.pkg` file and follow the installer steps.
@@ -52,10 +51,22 @@ AeroBrowser is distributed as a `.pkg` installer.
 
 ---
 
-## 🙏 Acknowledgements
+## 🗺️ Roadmap
 
-Parts of this project were inspired by or based on code from the [Opacity browser](https://github.com/Falsy/Opacity) by [Falsy](https://github.com/Falsy), licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+Planned features and improvements for upcoming releases:
 
-We thank them for their excellent open-source contribution, which made certain foundational elements of AeroBrowser possible.
+- 🔑 Password manager / passkeys support
+- 🧩 Extensions / content blocking improvements (rules, per-site toggles)
+- 🛡️ Improved privacy dashboard (trackers blocked, fingerprinting status, per-site permissions)
+- 🗂️ Better tab management (tab search, tab groups, pinned tabs)
+- 📖 Reader mode + improved PDF/document handling
+- ⚡ Performance and stability improvements (memory usage, startup time, rendering responsiveness)
+- 🎨 UI polish and accessibility improvements (keyboard navigation, VoiceOver, reduced motion)
+
+---
+
+## 💬 Support & Feedback
+
+Have a bug report, feature request, or general question? Please open an issue on the [GitHub Issues page](https://github.com/AeroBrowser-Official/AeroBrowser/issues).
 
 ---
