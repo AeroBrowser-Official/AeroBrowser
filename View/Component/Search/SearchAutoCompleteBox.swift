@@ -25,6 +25,7 @@ struct SearchAutoCompleteBox: View {
   
   @State private var isSiteDialog: Bool = false
   @State var isScrollable: Bool = false
+  @State private var isEnginePickerShown: Bool = false
   
   func decodeBase64ToNSImage(base64: String) -> NSImage? {
     guard let imageData = Data(base64Encoded: base64, options: .ignoreUnknownCharacters) else {
@@ -42,22 +43,31 @@ struct SearchAutoCompleteBox: View {
             if let settings = generalSettings.first, !StringURL.checkURL(url: tab.inputURL), tab.inputURL != "" {
               let searchEngine = settings.searchEngine
               let searchEngineData = SEARCH_ENGINE_LIST.first(where: { $0.name == searchEngine })
-              if let searchEngineFavicon = colorScheme == .dark ? searchEngineData?.faviconWhite : searchEngineData?.favicon, let uiImage = decodeBase64ToNSImage(base64: searchEngineFavicon) {
-                VStack(spacing: 0) {
-                  Image(nsImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: 15, maxHeight: 15)
-                    .clipped()
-                }
-                .frame(maxWidth: 26, maxHeight: 26, alignment: .center)
-              } else {
-                Image(systemName: "magnifyingglass")
+              Button {
+                isEnginePickerShown.toggle()
+              } label: {
+                if let searchEngineFavicon = colorScheme == .dark ? searchEngineData?.faviconWhite : searchEngineData?.favicon, let uiImage = decodeBase64ToNSImage(base64: searchEngineFavicon) {
+                  VStack(spacing: 0) {
+                    Image(nsImage: uiImage)
+                      .resizable()
+                      .aspectRatio(contentMode: .fill)
+                      .frame(maxWidth: 15, maxHeight: 15)
+                      .clipped()
+                  }
                   .frame(maxWidth: 26, maxHeight: 26, alignment: .center)
-                  .font(.system(size: 13))
-                  .clipShape(RoundedRectangle(cornerRadius: 14))
-                  .foregroundColor(Color("Icon"))
+                } else {
+                  Image(systemName: "magnifyingglass")
+                    .frame(maxWidth: 26, maxHeight: 26, alignment: .center)
+                    .font(.system(size: 13))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .foregroundColor(Color("Icon"))
+                }
               }
+              .buttonStyle(.plain)
+              .popover(isPresented: $isEnginePickerShown, arrowEdge: .bottom) {
+                SearchEnginePicker(isPresented: $isEnginePickerShown)
+              }
+              .guidedTip(.searchEngine, arrowEdge: .bottom)
             } else {
               Image(systemName: "magnifyingglass")
                 .frame(maxWidth: 26, maxHeight: 26, alignment: .center)

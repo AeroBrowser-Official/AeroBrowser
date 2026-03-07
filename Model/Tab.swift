@@ -341,6 +341,11 @@ final class Tab: ObservableObject {
       SearchManager.addSearchHistory(keyword)
     }
     
+    // Show search engine switcher tip after first search
+    Task { @MainActor in
+      GuidedTipController.shared.showContextualTip(.searchEngine)
+    }
+    
     let newURL = self.changeKeywordToURL(keyword)
     
     if self.isSetting {

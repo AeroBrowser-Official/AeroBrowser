@@ -67,5 +67,8 @@ struct MainView: View {
                 }
             }
         }
+        .onAppear {
+            GuidedTipController.shared.startTourIfNeeded()
+        }
     }
 }

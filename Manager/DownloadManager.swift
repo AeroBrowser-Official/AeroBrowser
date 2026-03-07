@@ -21,6 +21,7 @@ class DownloadManager: ObservableObject {
         DispatchQueue.main.async {
             self.downloads.insert(item, at: 0)
             self.updateActiveState()
+            GuidedTipController.shared.showContextualTip(.downloads)
         }
         return item
     }

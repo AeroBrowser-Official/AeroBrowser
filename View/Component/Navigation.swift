@@ -56,17 +56,20 @@ struct Navigation: View {
     @State private var isNotificationDetailDialog = true
 
     @ObservedObject private var downloadManager = DownloadManager.shared
+    @ObservedObject private var tipController = GuidedTipController.shared
 
     var body: some View {
         HStack(spacing: 8) {
             // ── Navigation controls ──
             HistoryBackBtn(browser: browser, tab: tab)
+                .guidedTip(.shortcuts, arrowEdge: .bottom)
             HistoryForwardBtn(browser: browser, tab: tab)
 
             if tab.pageProgress > 0 && tab.pageProgress < 1 {
                 HistoryStopBtn(tab: tab, iconHeight: 28, iconRadius: 6)
             } else {
                 HistoryRefreshBtn(iconHeight: 28, iconRadius: 6)
+                    .guidedTip(.newTab, arrowEdge: .bottom)
             }
 
             Spacer().frame(width: 4)
@@ -74,6 +77,7 @@ struct Navigation: View {
             // ── Search bar ──
             SearchBoxArea(browser: browser)
                 .frame(maxWidth: .infinity)
+                .guidedTip(.addressBar, arrowEdge: .bottom)
 
             Spacer().frame(width: 4)
 
@@ -124,10 +128,12 @@ struct Navigation: View {
             .popover(isPresented: $isDownloadsPopover, arrowEdge: .bottom) {
                 DownloadsPopover()
             }
+            .guidedTip(.downloads, arrowEdge: .top)
 
             NavIconButton(icon: "sidebar.right", isActive: browser.isSideBar) {
                 AppDelegate.shared.isSidebar()
             }
+            .guidedTip(.sidebar, arrowEdge: .top)
 
             NavIconButton(icon: "ellipsis", isActive: isMoreMenuDialog) {
                 isMoreMenuDialog.toggle()
@@ -135,6 +141,7 @@ struct Navigation: View {
             .popover(isPresented: $isMoreMenuDialog, arrowEdge: .bottom) {
                 MoreMenuDialog(browser: browser, tab: tab, isMoreMenuDialog: $isMoreMenuDialog)
             }
+            .guidedTip(.moreMenu, arrowEdge: .top)
         }
         .padding(.horizontal, 12)
         .frame(height: 40)

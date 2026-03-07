@@ -18,7 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
   
   weak var prevWindow: NSWindow?
   var windowMap: [UUID:NSWindow] = [:]
-    private let whatsNewShownKey = "lastWhatsNewVersion"
+  private let whatsNewShownKey = "lastWhatsNewVersion"
+  private var whatsNewWindow: NSWindow?
+  private var onboardingWindow: NSWindow?
 
   var service: Service = Service()
   let windowDelegate = AeroBrowserWindowDelegate()
@@ -142,9 +144,40 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
     func applicationDidFinishLaunching(_ notification: Notification) {
         AppDelegate.shared = self
         updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
-        createWindow()
-        showWhatsNewIfNeeded() // ✅ Shows only on new version
 
+        if !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+            showOnboarding()
+        } else {
+            createWindow()
+            showWhatsNewIfNeeded()
+        }
+    }
+
+    func showOnboarding() {
+        let window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 540, height: 520),
+            styleMask: [.titled, .closable, .fullSizeContentView],
+            backing: .buffered, defer: false
+        )
+        window.center()
+        window.title = "Welcome to AeroBrowser"
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.isReleasedWhenClosed = false
+        window.isMovableByWindowBackground = true
+
+        let hostingView = NSHostingController(rootView:
+            OnboardingView(onFinish: { [weak self] in
+                self?.onboardingWindow?.close()
+                self?.onboardingWindow = nil
+                self?.createWindow()
+            })
+            .modelContainer(modelContainer)
+        )
+        window.contentView = hostingView.view
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+        self.onboardingWindow = window
     }
 
     func showWhatsNewIfNeeded() {
@@ -154,17 +187,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate, ObservableOb
         if lastVersion != currentVersion {
             UserDefaults.standard.set(currentVersion, forKey: whatsNewShownKey)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
                 let window = NSWindow(
                     contentRect: NSRect(x: 0, y: 0, width: 460, height: 600),
                     styleMask: [.titled, .closable],
                     backing: .buffered, defer: false
                 )
                 window.center()
-                window.title = "What’s New"
-                window.contentView = NSHostingController(rootView: WhatsNewView(manager: WhatsNewManager())).view
+                window.title = "What's New"
+                window.isReleasedWhenClosed = false
+                let hostingView = NSHostingController(rootView: WhatsNewView(manager: WhatsNewManager(), onClose: { [weak self] in
+                    self?.whatsNewWindow?.close()
+                    self?.whatsNewWindow = nil
+                }))
+                window.contentView = hostingView.view
                 window.makeKeyAndOrderFront(nil)
                 NSApp.activate(ignoringOtherApps: true)
+                self.whatsNewWindow = window
             }
         }
     }
